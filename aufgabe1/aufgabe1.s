@@ -117,15 +117,21 @@ parse_email:
 
     ### E-Mail in Puffer einlesen (0.5 Punkte)
 	
+	la $a0, email_buffer
+	move $t7, $ra
 	jal read_email
-	
+	move $ra, $t7
     ### Position des Subjektes bestimmen (1 Punkt)
 	
+	#jal find_str
+	
 	### Position des Endes des Headers bestimmen (1 Punkt)
-
+	
+	#jal find_str
+	
     ### Rueckgabewerte bereitstellen (0.5 Punkte)
-	#la $v0, 42
-	#li $v1, 42
+	li $v0, 42
+	li $v1, 42
     ### Register wieder herstellen
     jr $ra
 
@@ -138,7 +144,7 @@ parse_email:
 
 .data
 
-input_file: .asciiz "email1"
+input_file: .asciiz "../email1"
 email_buffer: .space 4096
 size: .word 0
 
