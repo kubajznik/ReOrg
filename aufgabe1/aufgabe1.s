@@ -117,15 +117,15 @@ parse_email:
 
     ### E-Mail in Puffer einlesen (0.5 Punkte)
 	
-	jal read_email
+	#jal read_email
 	
     ### Position des Subjektes bestimmen (1 Punkt)
 	
 	### Position des Endes des Headers bestimmen (1 Punkt)
 
     ### Rueckgabewerte bereitstellen (0.5 Punkte)
-	la $v0, 42
-	li $v1, 42
+	#la $v0, 42
+	#li $v1, 42
     ### Register wieder herstellen
     jr $ra
 
