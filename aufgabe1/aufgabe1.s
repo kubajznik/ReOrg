@@ -117,7 +117,7 @@ parse_email:
 
     ### E-Mail in Puffer einlesen (0.5 Punkte)
 	
-	#jal read_email
+	jal read_email
 	
     ### Position des Subjektes bestimmen (1 Punkt)
 	
