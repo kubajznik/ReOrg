@@ -118,12 +118,22 @@ parse_email:
     ### E-Mail in Puffer einlesen (0.5 Punkte)
 
     ### Position des Subjektes bestimmen (1 Punkt)
-
+	
+	la $t0, header_subject
+	la $t1, header_subject
+	bef $t0, $t1, istgut
+	
+	li $v0, 0
+	j nein
+	
+	istgut:
+	li $v0, 1
+	nein:
     ### Position des Endes des Headers bestimmen (1 Punkt)
 
     ### Rueckgabewerte bereitstellen (0.5 Punkte)
-	li $v0, 42
-	li $v1, 42
+	###li $v0, 42
+	###li $v1, 42
     ### Register wieder herstellen
     jr $ra
 
