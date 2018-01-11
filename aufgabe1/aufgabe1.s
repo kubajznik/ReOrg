@@ -116,24 +116,16 @@ parse_email:
     ### Register gemass Konventionen sichern
 
     ### E-Mail in Puffer einlesen (0.5 Punkte)
-
+	
+	jal read_email
+	
     ### Position des Subjektes bestimmen (1 Punkt)
 	
-	la $t0, header_subject
-	la $t1, header_subject
-	bef $t0, $t1, istgut
-	
-	li $v0, 0
-	j nein
-	
-	istgut:
-	li $v0, 1
-	nein:
-    ### Position des Endes des Headers bestimmen (1 Punkt)
+	### Position des Endes des Headers bestimmen (1 Punkt)
 
     ### Rueckgabewerte bereitstellen (0.5 Punkte)
-	###li $v0, 42
-	###li $v1, 42
+	la $v0, 42
+	li $v1, 42
     ### Register wieder herstellen
     jr $ra
 
@@ -175,7 +167,7 @@ main:
 
     jal parse_email
 
-    # Position Subjekt sichern
+	# Position Subjekt sichern
     move $s0, $v0
     # Position Ende Header sichern
     move $s1, $v1
