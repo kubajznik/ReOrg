@@ -138,7 +138,7 @@ parse_email:
 
 .data
 
-input_file: .asciiz "../email1"
+input_file: .asciiz "email1"
 email_buffer: .space 4096
 size: .word 0
 
