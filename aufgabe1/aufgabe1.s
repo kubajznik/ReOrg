@@ -113,27 +113,38 @@ read_email:
 # v1: relative begin of body
 
 parse_email:
+	
     ### Register gemass Konventionen sichern
 
+	move $s7, $ra # Ruecksprungadresse sichern
+	
     ### E-Mail in Puffer einlesen (0.5 Punkte)
 	
 	la $a0, email_buffer
-	move $t7, $ra
 	jal read_email
-	move $ra, $t7
+	
     ### Position des Subjektes bestimmen (1 Punkt)
 	
-	#jal find_str
+	la $a0, email_buffer	# Email laden
+	la $a2, header_subject	# zu suchenden String laden
+	lw $a3, header_subject_length	# Laenge des zu suchenden String
+	jal find_str #in $v0 kommt Position vom Subject
 	
 	### Position des Endes des Headers bestimmen (1 Punkt)
 	
+	#la $a0, email_buffer	# Email laden
+	#la $a2, header_end	# zu suchenden String laden	
 	#jal find_str
 	
     ### Rueckgabewerte bereitstellen (0.5 Punkte)
-	li $v0, 42
-	li $v1, 42
+	
     ### Register wieder herstellen
-    jr $ra
+	
+	
+	
+	li $v1, 12
+    move $ra, $s7 # Ruecksprungadresse wieder laden
+	jr $ra
 
 #########################################
 # Aufgabe 1 Ende
