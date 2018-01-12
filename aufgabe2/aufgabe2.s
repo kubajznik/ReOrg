@@ -83,12 +83,14 @@ spamfilter:
     ### Der Text der E-Mail liegt im Puffer email_buffer
    
     ### Schleife ueber Bad words (wort1,gewicht1,wort2,gewicht2,...)
-    for:
+    
 		### lese ein Wort
 		la $a0, badwords_buffer
 		lw $a1, badwords_size
+	for:
 		la $a2, badwords_sep
 		li $a3, 1
+	
 		jr find_str
 		bltz $v0,endfor
 		move $t1, $v0
