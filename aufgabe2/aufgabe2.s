@@ -88,7 +88,7 @@ spamfilter:
 		la $a0, badwords_buffer
 		lw $a1, badwords_size
 		li $a2, 054				# Nach einem Komma suchen
-		li $a3, 
+		li $a3, 3
 		jr find_str
 		
 		### lese und konvertiere Gewicht
