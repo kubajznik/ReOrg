@@ -86,15 +86,14 @@ spamfilter:
     
 		### lese ein Wort
 	li $t1, 0
-	la $t2, badwords_buffer
-	lw $a1, badwords_size
-	la $a2, badwords_sep
-	li $a3, 1
-	
 	for:
+		la $t2, badwords_buffer
 		add $t2, $t2, $t1
 		move $a0, $t2
-			
+		lw $a1, badwords_size
+		la $a2, badwords_sep
+		li $a3, 1
+	
 		jr find_str
 		bltz $v0,endfor
 		move $t1, $v0
