@@ -85,12 +85,12 @@ spamfilter:
     ### Schleife ueber Bad words (wort1,gewicht1,wort2,gewicht2,...)
     
 		### lese ein Wort
-		la $a0, badwords_buffer
-		lw $a1, badwords_size
-	for:
-		la $a2, badwords_sep
-		li $a3, 1
+	la $a0, badwords_buffer
+	lw $a1, badwords_size
+	la $a2, badwords_sep
+	li $a3, 1
 	
+	for:
 		jr find_str
 		bltz $v0,endfor
 		move $t1, $v0
