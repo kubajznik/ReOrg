@@ -130,11 +130,12 @@ parse_email:
 	
     ### Position des Subjektes bestimmen (1 Punkt)
 	
-	la $a0, email_buffer	# Email laden
-	move $a1, $a2			# Laenge der Email
-	la $a2, header_subject	# zu suchenden String laden
+	la $a0, email_buffer			# Email laden
+	move $a1, $a2					# Laenge der Email
+	la $a2, header_subject			# zu suchenden String laden
 	lw $a3, header_subject_length	# Laenge des zu suchenden String
-	jal find_str #in $v0 kommt Position vom Subject
+	jal find_str 					#in $v0 kommt Position vom Subject
+	addi $v0, $v0, 9 				# Wollen Position von Subject an sich
 	
 	### Position des Endes des Headers bestimmen (1 Punkt)
 	
