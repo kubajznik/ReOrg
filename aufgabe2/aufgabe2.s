@@ -78,24 +78,26 @@ spamfilter:
 	
 	#addi $sp, $sp, -12
 	#sw $ra, 0($sp)
-	#move $fp, $ra
+	move $fp, $ra
     ### Badwords liegen im Puffer badwords_buffer
     ### Der Text der E-Mail liegt im Puffer email_buffer
    
     ### Schleife ueber Bad words (wort1,gewicht1,wort2,gewicht2,...)
-    #for:
+    for:
 		### lese ein Wort
 		la $a0, badwords_buffer
 		lw $a1, badwords_size
 		la $a2, badwords_sep
 		li $a3, 1
 		jr find_str
+		bltz $v0,endfor
+		move $t1, $v0
 		
 		### lese und konvertiere Gewicht
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
-#	j for
-	#endfor:
-    
+	j for
+	endfor:
+    move $v0, $t1
 	### Rueckgabewert setzen
 	
 #	li $v0, 42
@@ -104,7 +106,7 @@ spamfilter:
     
 	#lw $ra, 0($sp)
 	#addi $sp, $sp, 12
-	#move $ra, $fp
+	move $ra, $fp
 	
 	jr $ra
 
