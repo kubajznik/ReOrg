@@ -87,7 +87,7 @@ spamfilter:
 		### lese ein Wort
 	li $v0, 0
 	for:
-		la $a0, $v0(badwords_buffer)
+		la $a0, 4(badwords_buffer)
 		lw $a1, badwords_size
 		la $a2, badwords_sep
 		li $a3, 1
