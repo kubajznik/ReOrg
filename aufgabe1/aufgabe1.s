@@ -136,21 +136,23 @@ parse_email:
 	lw $a3, header_subject_length	# Laenge des zu suchenden String
 	jal find_str 					#in $v0 kommt Position vom Subject
 	addi $v0, $v0, 9 				# Wollen Position von Subject an sich
+	move $s8, $v0
 	
 	### Position des Endes des Headers bestimmen (1 Punkt)
 	
-	#la $a0, email_buffer	# Email laden
-	#la $a2, header_end	# zu suchenden String laden	
-	#jal find_str
+	#la $a0, email_buffer		# Email laden
+	la $a2, header_end			# zu suchenden String laden	
+	lw $a3, header_end_length	# Länge des zu suchenden String
+	jal find_str
 	
     ### Rueckgabewerte bereitstellen (0.5 Punkte)
 	
     ### Register wieder herstellen
 	
 	
-	
-	li $v1, 12
-   
+	move $v1, $v0
+	move $v0, $s8
+	  
     lw $ra, 0($sp)
     lw $s0, 4($sp)
     lw $s1, 8($sp)
