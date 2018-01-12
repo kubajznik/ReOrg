@@ -87,7 +87,7 @@ spamfilter:
 		### lese ein Wort
 		la $a0, badwords_buffer
 		lw $a1, badwords_size
-		lw $a2, .asciiz ","					# Nach einem Komma suchen
+		li $a2, .asciiz ","					# Nach einem Komma suchen
 		li $a3, 1
 		jr find_str
 
