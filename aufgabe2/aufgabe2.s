@@ -87,11 +87,10 @@ spamfilter:
 		### lese ein Wort
 		la $a0, badwords_buffer
 		lw $a1, badwords_size
-		la $a2, komma				# Nach einem Komma suchen
+		li $a2, 054				# Nach einem Komma suchen
 		li $a3, 1
-		jr find_str
-
-        ### lese und konvertiere Gewicht
+		
+		### lese und konvertiere Gewicht
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 #	j for
 	#endfor:
