@@ -145,6 +145,7 @@ parse_email:
 	la $a2, header_end			# zu suchenden String laden	
 	lw $a3, header_end_length	# Länge des zu suchenden String
 	jal find_str
+	addi $v0, $v0, 4
 	
     ### Rueckgabewerte bereitstellen (0.5 Punkte)
 	
