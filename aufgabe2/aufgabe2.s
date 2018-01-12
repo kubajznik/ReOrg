@@ -85,10 +85,10 @@ spamfilter:
     ### Schleife ueber Bad words (wort1,gewicht1,wort2,gewicht2,...)
     #for:
 		### lese ein Wort
-		la $v0, badwords_buffer
-		lw $v1, badwords_size
-		li $v2, 44					# Nach einem Komma suchen
-		li $v3, 1
+		la $a0, badwords_buffer
+		lw $a1, badwords_size
+		li $a2, 44					# Nach einem Komma suchen
+		li $a3, 1
 		jr find_str
 
         ### lese und konvertiere Gewicht
