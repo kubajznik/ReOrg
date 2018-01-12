@@ -75,7 +75,10 @@ found_str:
 
 spamfilter:
     ### Register gemaess Registerkonventionen sichern
-
+	
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+	
     ### Badwords liegen im Puffer badwords_buffer
     ### Der Text der E-Mail liegt im Puffer email_buffer
    
@@ -85,8 +88,15 @@ spamfilter:
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 
     ### Rueckgabewert setzen
+	
+	li $v0, 42
+	
     ### Register wieder herstellen
-    jr $ra
+    
+	lw $ra, 0($sp)
+	addi $sp, $sp, 4
+	
+	jr $ra
 
 #########################################
 #
