@@ -89,10 +89,10 @@ spamfilter:
 		lw $a1, badwords_size
 		
 		li $t1, 44				# Nach einem Komma suchen
-		sb $t1, 0($sp)
-		lb $a2, 0($sp)
+		sb $t1, 4($sp)
+		la $a2, 4($sp)
 		
-		li $a3, 3
+		li $a3, 1
 		jr find_str
 		
 		### lese und konvertiere Gewicht
