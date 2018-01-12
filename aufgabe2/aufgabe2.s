@@ -78,7 +78,7 @@ spamfilter:
 	
 	#addi $sp, $sp, -12
 	#sw $ra, 0($sp)
-	move $fp, $ra
+	#move $fp, $ra
     ### Badwords liegen im Puffer badwords_buffer
     ### Der Text der E-Mail liegt im Puffer email_buffer
    
@@ -104,7 +104,7 @@ spamfilter:
     
 	#lw $ra, 0($sp)
 	#addi $sp, $sp, 12
-	move $ra, $fp
+	#move $ra, $fp
 	
 	jr $ra
 
