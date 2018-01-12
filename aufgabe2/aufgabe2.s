@@ -83,13 +83,22 @@ spamfilter:
     ### Der Text der E-Mail liegt im Puffer email_buffer
    
     ### Schleife ueber Bad words (wort1,gewicht1,wort2,gewicht2,...)
-        ### lese ein Wort
+    for:
+		### lese ein Wort
+		la $v0, badwords_buffer
+		lw $v1, badwords_size
+		li $v2, 44					# Nach einem Komma suchen
+		li $v3, 1
+		jr find_str
+
         ### lese und konvertiere Gewicht
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
-
-    ### Rueckgabewert setzen
+#	j for
+	endfor:
+    
+	### Rueckgabewert setzen
 	
-	li $v0, 42
+#	li $v0, 42
 	
     ### Register wieder herstellen
     
