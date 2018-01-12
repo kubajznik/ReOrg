@@ -120,8 +120,8 @@ parse_email:
 	
 	addi $sp, $sp, -12
     sw $ra, 0($sp)
-    sw $s0, 4($sp)
-    sw $s1, 8($sp)
+    sw $v0, 4($sp)
+    sw $v1, 8($sp)
 	
     ### E-Mail in Puffer einlesen (0.5 Punkte)
 	
@@ -137,8 +137,7 @@ parse_email:
 	jal find_str 					# in $v0 kommt Position vom Subject
 	addi $v0, $v0, 9 				# 9 Addieren wegen der Laenge des Suchkriteriums
 	move $s8, $v0					# Ergebnis sichern wegen nochmaligem Aufruf von find_str
-	#li $v0, 0						# 
-	
+
 	### Position des Endes des Headers bestimmen (1 Punkt)
 	
 	la $a0, email_buffer		# Email neu laden
@@ -148,20 +147,18 @@ parse_email:
 	addi $v0, $v0, 4			# 4 Addieren wg Laenge des Suchkriteriums
 	
     ### Rueckgabewerte bereitstellen (0.5 Punkte)
+
+	move $v1, $v0	# Letzte Ausgabe in $v0 ist Position vom Ende des Header
+	move $v0, $s8	# in $s8 ist Position von Subject gespeichert
 	
     ### Register wieder herstellen
 	
-	
-	move $v1, $v0
-	move $v0, $s8
-	  
-    lw $ra, 0($sp)
-    lw $s0, 4($sp)
-    lw $s1, 8($sp)
+	lw $ra, 0($sp)
+    lw $v0, 4($sp)
+    lw $v1, 8($sp)
     addi $sp, $sp, 12   
 
-    #move $ra, $s7 # Ruecksprungadresse wieder laden
-	jr $ra
+    jr $ra
 
 #########################################
 # Aufgabe 1 Ende
