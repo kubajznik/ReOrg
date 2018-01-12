@@ -141,7 +141,8 @@ parse_email:
 	
 	### Position des Endes des Headers bestimmen (1 Punkt)
 	
-	#la $a0, email_buffer		# Email laden
+	la $a0, email_buffer		# Email laden
+	li $a1, 4096
 	la $a2, header_end			# zu suchenden String laden	
 	lw $a3, header_end_length	# Länge des zu suchenden String
 	jal find_str
