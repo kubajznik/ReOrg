@@ -88,7 +88,8 @@ spamfilter:
 		la $a0, badwords_buffer
 		lw $a1, badwords_size
 		li $a2, 054				# Nach einem Komma suchen
-		li $a3, 1
+		li $a3, 
+		jr find_str
 		
 		### lese und konvertiere Gewicht
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
