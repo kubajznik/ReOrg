@@ -87,11 +87,7 @@ spamfilter:
 		### lese ein Wort
 		la $a0, badwords_buffer
 		lw $a1, badwords_size
-		
-		li $t1, 44				# Nach einem Komma suchen
-		sb $t1, 0($sp)
-		la $a2, 0($sp)
-		
+		la $a2, badwords_sep
 		li $a3, 1
 		jr find_str
 		
@@ -126,6 +122,8 @@ size: .word 538
 
 badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,10,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
 badwords_size: .word 93
+
+badwords_sep: .asciiz ","
 
 spamscore_text: .asciiz "Der Spamscore betraegt: "
 
