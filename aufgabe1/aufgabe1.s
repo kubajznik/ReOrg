@@ -120,8 +120,8 @@ parse_email:
 	
 	addi $sp, $sp, -12
     sw $ra, 0($sp)
-    sw $v0, 4($sp)
-    sw $v1, 8($sp)
+    #sw $v0, 4($sp)
+    #sw $v1, 8($sp)
 	
     ### E-Mail in Puffer einlesen (0.5 Punkte)
 	
@@ -154,8 +154,8 @@ parse_email:
     ### Register wieder herstellen
 	
 	lw $ra, 0($sp)
-    lw $v0, 4($sp)
-    lw $v1, 8($sp)
+    #lw $v0, 4($sp)
+    #lw $v1, 8($sp)
     addi $sp, $sp, 12   
 
     jr $ra
