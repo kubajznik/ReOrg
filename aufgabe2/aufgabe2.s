@@ -87,8 +87,8 @@ spamfilter:
 		### lese ein Wort
 		la $a0, badwords_buffer
 		lw $a1, badwords_size
-		li $a2, 44				# Nach einem Komma suchen
-		li $a3, 2
+		la $a2, komma				# Nach einem Komma suchen
+		li $a3, 1
 		jr find_str
 
         ### lese und konvertiere Gewicht
@@ -119,6 +119,8 @@ spamfilter:
 email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es sich nicht um Spam sondern ich moechte Ihnen\nvielmehr ein lukratives Angebot machen: Mein entfernter Onkel hat mir mehr Geld\nhinterlassen als in meine Geldboerse passt. Ich muss Ihnen also etwas abgeben.\nVorher muss ich nur noch einen Spezialumschlag kaufen. Senden Sie mir noch\nheute BTC 1,000 per Western-Union und ich verspreche hoch und heilig Ihnen\nalsbald den gerechten Teil des Vermoegens zu vermachen.\n\nHochachtungsvoll\nAchim Mueller\nSekretaer fuer Vermoegensangelegenheiten\n"
 
 size: .word 538
+
+komma: .asciiz ","
 
 badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,10,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
 badwords_size: .word 93
