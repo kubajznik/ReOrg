@@ -179,7 +179,7 @@ size: .word 0
 header_subject: .asciiz "Subject: "
 header_subject_length: .word 9
 
-header_end: .byte 13, 10
+header_end: .byte 13, 10, 13, 10
 header_end_length: .word 4
 
 subject_pos: .asciiz "Position Subjekt: "
