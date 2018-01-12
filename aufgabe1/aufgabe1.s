@@ -137,7 +137,7 @@ parse_email:
 	jal find_str 					#in $v0 kommt Position vom Subject
 	addi $v0, $v0, 9 				# Wollen Position von Subject an sich
 	move $s8, $v0
-	li $v0, $zero
+	lw $v0, $zero
 	
 	### Position des Endes des Headers bestimmen (1 Punkt)
 	
