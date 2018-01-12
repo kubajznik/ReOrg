@@ -116,7 +116,12 @@ parse_email:
 	
     ### Register gemass Konventionen sichern
 
-	move $s7, $ra # Ruecksprungadresse sichern
+	##move $s7, $ra # Ruecksprungadresse sichern
+	
+	addi $sp, $sp, -12
+    sw $ra, 0($sp)
+    sw $s0, 4($sp)
+    sw $s1, 8($sp)
 	
     ### E-Mail in Puffer einlesen (0.5 Punkte)
 	
@@ -126,6 +131,7 @@ parse_email:
     ### Position des Subjektes bestimmen (1 Punkt)
 	
 	la $a0, email_buffer	# Email laden
+	move $a1, $a2			# Laenge der Email
 	la $a2, header_subject	# zu suchenden String laden
 	lw $a3, header_subject_length	# Laenge des zu suchenden String
 	jal find_str #in $v0 kommt Position vom Subject
@@ -143,7 +149,13 @@ parse_email:
 	
 	
 	li $v1, 12
-    move $ra, $s7 # Ruecksprungadresse wieder laden
+   
+    lw $ra, 0($sp)
+    lw $s0, 4($sp)
+    lw $s1, 8($sp)
+    addi $sp, $sp, 12   
+
+    #move $ra, $s7 # Ruecksprungadresse wieder laden
 	jr $ra
 
 #########################################
