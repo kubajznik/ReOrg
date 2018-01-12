@@ -90,7 +90,7 @@ spamfilter:
 		
 		li $t1, 44				# Nach einem Komma suchen
 		sb $t1, 0($sp)
-		la $a2, 0($sp)
+		lb $a2, 0($sp)
 		
 		li $a3, 3
 		jr find_str
