@@ -107,7 +107,7 @@ print_email:
 	
     ### hier implementieren
 	
-	li $a1, 50
+	li $a1, 200
 	jal write_email
 	
 	
@@ -127,7 +127,7 @@ print_email:
 
 .data
 
-input_file: .asciiz "email1"
+input_file: .asciiz "../email1"
 output_file: .asciiz "output"
 email_buffer: .space 4096
 
