@@ -108,7 +108,6 @@ print_email:
     ### hier implementieren
 	
 	li $a1, 50
-	la $a2, output_file
 	jal write_email
 	
 	
