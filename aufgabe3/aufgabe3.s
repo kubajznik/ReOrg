@@ -102,11 +102,20 @@ write_email:
 
 print_email:
     ### Register gemass Konventionen sichern
-
+	addi $sp, $sp, -8
+	sw $ra, 0($sp)
+	
     ### hier implementieren
-
+	li $v0, 1
+	li $a0, 42
+	syscall
+	
+	
     ### gesicherte Register wieder herstellen
-    jr $ra
+    lw $ra, 0($sp)
+	addi $sp, $sp, 8
+	
+	jr $ra
 
 
 #########################################
