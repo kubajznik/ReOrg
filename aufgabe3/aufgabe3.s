@@ -107,7 +107,8 @@ print_email:
 	
     ### hier implementieren
 	
-	li $a1, 200
+	li $a2, 0
+	li $a3, 0
 	jal write_email
 	
 	
