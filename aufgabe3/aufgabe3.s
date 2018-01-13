@@ -106,9 +106,10 @@ print_email:
 	sw $ra, 0($sp)
 	
     ### hier implementieren
-	li $v0, 1
-	li $a0, 42
-	syscall
+	
+	li $a1, 50
+	la $a2, output_file
+	jal write_email
 	
 	
     ### gesicherte Register wieder herstellen
