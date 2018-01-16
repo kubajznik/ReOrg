@@ -121,11 +121,12 @@ print_email:
 		lw $a1, spam_flag_length
 		jal write_email
 		
-		#li $a2, 0
-		#la $a0, email_buffer
-		
-		#move $a1, $t2
-		#jal write_email
+		li $a2, 0
+		la $a0, email_buffer
+		add $a0, $a0, $t3
+		move $a1, $t2
+		addi $a1, -292
+		jal write_email
 		
 	
 	j spam
