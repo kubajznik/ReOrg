@@ -93,12 +93,12 @@ spamfilter:
 	li $a3, 1	
 	jal find_str				# Komma finden, Position in $v0
 		
-	sub $a0, $a0, $v0
+	addi $a0, -4
 	
 	la $a0, email_buffer
 	lw $a1, size
 	move $a2, $a0
-	move $a3, $v0
+	li $a3, 4
 	
 	jal find_str
 	
