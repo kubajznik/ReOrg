@@ -99,6 +99,7 @@ spamfilter:
 	addi $t2, -48 				# in int umrechnen
 	
 	### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
+	move $t4, $a2
 	sub $a0, $a0, $v0
 	move $a2, $a0
 	la $a0, email_buffer
@@ -107,10 +108,13 @@ spamfilter:
 	li $t3, 0					# Register fuer Gesamtgewicht des Wortes
 	for:
 		jal find_str
-		addi $a0, 1
 		bltz $v0, endfor
 		add $t3, $t3, $t2
 		
+		addi $a0, 1
+		lw $a1, size
+		move $a2, $t4
+		move $a3, $v0
 	j for
 	endfor:
 	
