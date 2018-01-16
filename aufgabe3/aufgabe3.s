@@ -109,7 +109,7 @@ print_email:
 	
 	li $t1, 0
 	move $t2, $a1
-	#move $t3, $a2
+	move $t3, $a2
 	
 	beq $a3, $t1, nospam
 		move $a1, $a2
@@ -121,12 +121,11 @@ print_email:
 		lw $a1, spam_flag_length
 		jal write_email
 		
-		li $a2, 0
-		la $a0, email_buffer
-		li $t3, 292
-		srlv $a0,$a0,$t3
-		move $a1, $t2
-		jal write_email
+		#li $a2, 0
+		#la $a0, email_buffer
+		
+		#move $a1, $t2
+		#jal write_email
 		
 	
 	j spam
