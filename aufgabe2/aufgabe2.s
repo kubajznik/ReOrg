@@ -84,57 +84,71 @@ spamfilter:
    
     ### Schleife ueber Bad words (wort1,gewicht1,wort2,gewicht2,...)
 
-	
-
-	### lese ein Wort
 	la $a0, badwords_buffer
 	lw $a1, badwords_size
-	la $a2, badwords_sep
-	li $a3, 1	
-	
-	jal find_str				# Komma finden, Position in $v0
-	
-	move $s1, $v0				# Wortlaenge sichern
-	
-	### lese und konvertiere Gewicht
-	lb $s2, 1($a0)
-	addi $s2, -48 				# in int umrechnen
-	
-	
-	
-	
-	### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
-	sub $a0, $a0, $v0			# Adresse in $a0 wieder auf Anfang schieben 
-	move $s4, $a0				# Adresse von Needle fuer Schleife speichern
-	la $a0, email_buffer		# Adresse von E-Mail
-	lw $a1, size				# Laenge von E-Mail
-	move $a2, $s4				# Adresse der Needle
-	move $a3, $s1				# Laenge von Needle
-	
-	li $s3, 0					# Register fuer Gesamtgewicht des Wortes
-	for:
-		move $s5, $a0
+	li $s7, 0	
+	bigfor:
+		bltz $a1, endbigfor
+		la $a2, badwords_sep
+		li $a3, 1
+		### lese ein Wort
+		jal find_str				# Komma finden, Position in $v0
 		
-		jal find_str			# Nach Badword suchen
+		move $s1, $v0				# Wortlaenge sichern
 		
-		bltz $v0, endfor		# Wenn keins gefunden, abbrechen
+		### lese und konvertiere Gewicht
+		lb $s2, 1($a0)
+		addi $s2, -48 				# in int umrechnen
 		
-		add $s3, $s3, $s2		# Sonst Gewicht addieren
+		
+		
+		
+		### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 
-		add $a0, $s5, $v0		# Adrese bis zum aktuellen Fund vorschieben
-		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
+		sub $a0, $a0, $v0			# Adresse in $a0 wieder auf Anfang schieben 
+		move $s4, $a0				# Adresse von Needle fuer Schleife speichern
+		la $a0, email_buffer		# Adresse von E-Mail
+		lw $a1, size				# Laenge von E-Mail
+		move $a2, $s4				# Adresse der Needle
+		move $a3, $s1				# Laenge von Needle
 		
-		lw $a1, size			# Laenge der E-Mail
-		sub $a1, $a1, $v0
-		#addi $a1, -1
+		li $s3, 0					# Register fuer Gesamtgewicht des Wortes
+		for:
+			move $s5, $a0
+			
+			jal find_str			# Nach Badword suchen
+			
+			bltz $v0, endfor		# Wenn keins gefunden, abbrechen
+			
+			add $s3, $s3, $s2		# Sonst Gewicht addieren
+
+			add $a0, $s5, $v0		# Adrese bis zum aktuellen Fund vorschieben
+			addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
+			
+			lw $a1, size			# Laenge der E-Mail
+			sub $a1, $a1, $v0
+			#addi $a1, -1
+			
+			move $a2, $s4			# Adrese der Needle
+			
+			move $a3, $s1			# Laenge der Needle
+			
+			j for
+		endfor:
 		
-		move $a2, $s4			# Adrese der Needle
+		move $s7, $s3
 		
-		move $a3, $s1			# Laenge der Needle
+		li $s6, 3
+		la $a0, badwords_buffer
+		add $a0, $s1, $s6
+		lw $a1, badwords_size
+		sub $a1, $a1, $s1
+		sub $a1, $a1, $s6
+
+		j bigfor
+	endbigfor:	
 		
-		j for
-	endfor:
-	move $v0, $s3
+	move $v0, $s7
 		
 		
 		
@@ -175,11 +189,11 @@ spamfilter:
 
 .data
 
-email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail Spam handelt es sich nicht um Spam sondern ich moechte Ihnen\nvielmehr ein lukratives Angebot machen: Mein entfernter Onkel hat mir mehr Geld\nhinterlassen als in meine Geldboerse passt. Ich muss Ihnen also etwas abgeben.\nVorher muss ich nur noch einen Spezialumschlag kaufen. Senden Sie mir noch\nheute BTC 1,000 per Western-Union und ich verspreche hoch und heilig Ihnen\nalsbald den gerechten Teil des Vermoegens zu vermachen.\n\nHochachtungsvoll\nAchim Mueller\nSekretaer fuer Vermoegensangelegenheiten\n"
+email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es sich nicht um Spam sondern ich moechte Ihnen\nvielmehr ein lukratives Angebot machen: Mein entfernter Onkel hat mir mehr Geld\nhinterlassen als in meine Geldboerse passt. Ich muss Ihnen also etwas abgeben.\nVorher muss ich nur noch einen Spezialumschlag kaufen. Senden Sie mir noch\nheute BTC 1,000 per Western-Union und ich verspreche hoch und heilig Ihnen\nalsbald den gerechten Teil des Vermoegens zu vermachen.\n\nHochachtungsvoll\nAchim Mueller\nSekretaer fuer Vermoegensangelegenheiten\n"
 
 size: .word 538
 
-badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,10,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
+badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,1,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
 badwords_size: .word 93
 
 badwords_sep: .asciiz ","
