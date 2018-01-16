@@ -95,16 +95,15 @@ spamfilter:
 	
 		jal find_str				# Komma finden, Position in $v0
 		
-		addi $v0, 1
-		add $a0, $a0, $v0
-		lb $t1, ($a0)			# Text bis Komma laden
-		
 		### lese und konvertiere Gewicht
 		
-		
-		
-		andi $t1, $t1, 0x0F
+		addi $v0, 1
+		add $a0, $a0, $v0
+		lb $t1, ($a0)			# Gewicht laden
+				
+		addi $t1, -48		# In int umrechnen
 		move $v0, $t1
+		
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 		#bltz $v0,endfor
 	#j for
@@ -119,6 +118,7 @@ spamfilter:
     
 	#lw $ra, 0($sp)
 	#addi $sp, $sp, 12
+	
 	move $ra, $fp
 	
 	jr $ra
