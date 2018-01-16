@@ -104,7 +104,7 @@ spamfilter:
 		
 		
 		andi $t2, $t2, 0x0F
-		move $v0, $t2
+		#move $v0, $t2
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 		#bltz $v0,endfor
 	#j for
@@ -158,7 +158,7 @@ main:
 
 
     jal spamfilter
-    move $s0, $v0
+    move $s0, $t2
 
 
     li $v0, 4
