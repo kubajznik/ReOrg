@@ -118,7 +118,8 @@ print_email:
 		la $a0, spam_flag
 		lw $a1, spam_flag_length
 		jal write_email
-	
+		
+		li $a2, 9
 		la $a0, email_buffer
 		move $a1, $t2
 		jal write_email
