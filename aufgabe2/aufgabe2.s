@@ -163,7 +163,7 @@ main:
     li $v0, 4
     la $a0, spamscore_text
     syscall
-    li $a0, 300
+    move $a0, $s0
     li $v0, 1
     syscall
 
