@@ -110,6 +110,12 @@ print_email:
 	li $t1, 0
 	beq $a3, $t1, nospam
 		move $a1, $a2
+		li $a2, 1
+		jal write_email
+		
+		li $a2, 0
+		la $a0, spam_flag
+		lw $a1, spam_flag_length
 		jal write_email
 	
 	j spam
