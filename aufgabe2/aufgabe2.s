@@ -86,37 +86,47 @@ spamfilter:
 
 
 	li $s5, 0
-	li $t3, 0
-	li $t4, 5
 
-		la $a0, badwords_buffer
-		lw $a1, badwords_size
-		la $a2, badwords_sep
-		li $a3, 1
+	la $a0, badwords_buffer
+	lw $a1, badwords_size
 	
-	for:    
-		### lese ein Wort
+	#for:    
+	
+	la $a2, badwords_sep
+	li $a3, 1
 
+	### lese ein Wort
+		move $t2, $a1
 		jal find_str				# Komma finden, Position in $v0
 		
+		sub $a0, $a0, $v0
+		sb $a0, 4($sp)
+		addi $a0, 1
+		sb $a0, 5($sp)
+		addi $a0, 1
+		sb $a0, 6($sp)
+		
+		la $a0, $sp
+		li $v0, 4
+		syscall
 		### lese und konvertiere Gewicht
 		
-		addi $a0, 1
-		#add $a0, $a0, $v0
-		lb $t1, ($a0)			# Gewicht laden
-				
-		addi $t1, -48		# In int umrechnen
-		add $s5, $s5, $t1
+		#addi $a0, 1
 		
-		jal find_str
-		add $a0, $a0, $v0
-		addi $a0, 1
+		#lb $t1, ($a0)			# Gewicht laden
+				
+		#addi $t1, -48		# In int umrechnen
+				
+		#sub $t2, $t2, $v0
+		#addi $t2, -1
+		#move $a1, $t2
+		
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
-		addi $t3, 1
-		bge $t3, $t4, endfor
-	j for
-	endfor:
-    move $v0, $s5
+		
+	#	bltz $v0, endfor
+	#j for
+	#endfor:
+    #move $v0, $s5
 	
 	### Rueckgabewert setzen
 	
