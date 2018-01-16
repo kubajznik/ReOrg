@@ -87,10 +87,11 @@ spamfilter:
 	la $a0, badwords_buffer
 	lw $a1, badwords_size
 	li $s3, 0	
+	li $t8, 5
 	bigfor:
-		addi $a1, -1
-		bltz $a1, endbigfor
-		addi $a1, 1
+		#addi $a1, -1
+		bltz $t8, endbigfor
+		#addi $a1, 1
 		la $a2, badwords_sep
 		li $a3, 1
 		### lese ein Wort
@@ -148,7 +149,7 @@ spamfilter:
 		lw $a1, badwords_size
 		sub $a1, $a1, $s1
 		sub $a1, $a1, $s6
-
+		addi $t8, -1
 		j bigfor
 	endbigfor:	
 		
