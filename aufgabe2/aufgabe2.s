@@ -92,30 +92,39 @@ spamfilter:
 	la $a2, badwords_sep
 	li $a3, 1	
 	jal find_str				# Komma finden, Position in $v0
-		
-	sub $a0, $a0, $v0
+	move $t1, $v0				# Wortlaenge sichern
 	
+	### lese und konvertiere Gewicht
+	lb $t2, 1($a0)
+	addi $t2, -48 				# in int umrechnen
+	
+	### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
+	sub $a0, $a0, $v0
 	move $a2, $a0
 	la $a0, email_buffer
 	lw $a1, size
 	move $a3, $v0
+	li $t3, 0					# Register fuer Gesamtgewicht des Wortes
+	for:
+		jal find_str
+		bltz $v0, endfor
+		add $t3, $t3, $t2
+		addi $a0, 1
+	j for
+	endfor:
 	
-	jal find_str
-	
-		### lese und konvertiere Gewicht
 		
-		#addi $a0, 1
 		
-		#lb $t1, ($a0)			# Gewicht laden
-				
-		#addi $t1, -48		# In int umrechnen
+		
 				
 		#sub $t2, $t2, $v0
 		#addi $t2, -1
 		#move $a1, $t2
 		
-        ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
-		
+       
+	
+	
+	
 	#	bltz $v0, endfor
 	#j for
 	#endfor:
