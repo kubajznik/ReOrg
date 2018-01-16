@@ -109,25 +109,22 @@ spamfilter:
 	move $a3, $s1				# Laenge von Needle
 	
 	li $s3, 0					# Register fuer Gesamtgewicht des Wortes
-	li $s6, 0
 	for:
 		move $s5, $a0
 		
-		jal find_str			# NAch Badword suchen
+		jal find_str			# Nach Badword suchen
 		
 		bltz $v0, endfor		# Wenn keins gefunden, abbrechen
 		add $s3, $s3, $s2		# Sonst Gewicht addieren
 		addi $s6, 1
 		add $a0, $s5, $v0
 		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
-		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
-		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
 		lw $a1, size			# Laenge der E-Mail
 		move $a2, $s4			# Adrese der Needle
 		move $a3, $s1			# Laenge der Needle
 	j for
 	endfor:
-	move $v0, $s6
+	move $v0, $s3
 		
 		
 		
@@ -167,7 +164,7 @@ spamfilter:
 
 .data
 
-email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es sich nicht um Spam sondern ich moechte Ihnen\nvielmehr ein lukratives Angebot machen: Mein entfernter Onkel hat mir mehr Geld\nhinterlassen als in meine Geldboerse passt. Ich muss Ihnen also etwas abgeben.\nVorher muss ich nur noch einen Spezialumschlag kaufen. Senden Sie mir noch\nheute BTC 1,000 per Western-Union und ich verspreche hoch und heilig Ihnen\nalsbald den gerechten Teil des Vermoegens zu vermachen.\n\nHochachtungsvoll\nAchim Mueller\nSekretaer fuer Vermoegensangelegenheiten\n"
+email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es sich nicht um Spam Spam Spam sondern ich moechte Ihnen\nvielmehr ein lukratives Angebot machen: Mein entfernter Onkel hat mir mehr Geld\nhinterlassen als in meine Geldboerse passt. Ich muss Ihnen also etwas abgeben.\nVorher muss ich nur noch einen Spezialumschlag kaufen. Senden Sie mir noch\nheute BTC 1,000 per Western-Union und ich verspreche hoch und heilig Ihnen\nalsbald den gerechten Teil des Vermoegens zu vermachen.\n\nHochachtungsvoll\nAchim Mueller\nSekretaer fuer Vermoegensangelegenheiten\n"
 
 size: .word 538
 
