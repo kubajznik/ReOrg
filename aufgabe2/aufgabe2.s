@@ -122,10 +122,6 @@ spamfilter:
 
 		add $a0, $s5, $v0		# Adrese bis zum aktuellen Fund vorschieben
 		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
-		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
-		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
-		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
-		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
 		lw $a1, size			# Laenge der E-Mail
 		move $a2, $s4			# Adrese der Needle
 		move $a3, $s1			# Laenge der Needle
@@ -175,7 +171,7 @@ email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es 
 
 size: .word 538
 
-badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,10,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
+badwords_buffer: .asciiz "Geld,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,10,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
 badwords_size: .word 93
 
 badwords_sep: .asciiz ","
