@@ -109,6 +109,8 @@ print_email:
 	
 	li $t1, 0
 	move $t2, $a1
+	move $t3, $a2
+	
 	beq $a3, $t1, nospam
 		move $a1, $a2
 		li $a2, 1
@@ -121,6 +123,7 @@ print_email:
 		
 		li $a2, 0
 		la $a0, email_buffer
+		srlv $a0,$a0,$t3
 		move $a1, $t2
 		jal write_email
 		
