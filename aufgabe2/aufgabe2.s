@@ -130,7 +130,7 @@ spamfilter:
 			add $s3, $s3, $s2		# Sonst Gewicht addieren
 
 			add $a0, $s5, $v0		# Adresse bis zum aktuellen Fund vorschieben
-			#addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
+			addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
 			
 			lw $a1, size			# Laenge der E-Mail
 			sub $a1, $a1, $v0
@@ -193,7 +193,7 @@ spamfilter:
 
 .data
 
-email_buffer: .asciiz "Hochverehrte Spam .... Spam .... Spam .... Spam Empfaenger,\n\nbei dieser E-Mail handelt es sich nicht um Spam sondern ich moechte Ihnen\nvielmehr ein lukratives Angebot machen: Mein entfernter Onkel hat mir mehr Geld\nhinterlassen als in meine Geldboerse passt. Ich muss Ihnen also etwas abgeben.\nVorher muss ich nur noch einen Spezialumschlag kaufen. Senden Sie mir noch\nheute BTC 1,000 per Western-Union und ich verspreche hoch und heilig Ihnen\nalsbald den gerechten Teil des Vermoegens zu vermachen.\n\nHochachtungsvoll\nAchim Mueller\nSekretaer fuer Vermoegensangelegenheiten\n"
+email_buffer: .asciiz "Hochverehrte Spam Spam Spam Spam Empfaenger,\n\nbei dieser E-Mail handelt es sich nicht um Spam sondern ich moechte Ihnen\nvielmehr ein lukratives Angebot machen: Mein entfernter Onkel hat mir mehr Geld\nhinterlassen als in meine Geldboerse passt. Ich muss Ihnen also etwas abgeben.\nVorher muss ich nur noch einen Spezialumschlag kaufen. Senden Sie mir noch\nheute BTC 1,000 per Western-Union und ich verspreche hoch und heilig Ihnen\nalsbald den gerechten Teil des Vermoegens zu vermachen.\n\nHochachtungsvoll\nAchim Mueller\nSekretaer fuer Vermoegensangelegenheiten\n"
 
 size: .word 538
 
