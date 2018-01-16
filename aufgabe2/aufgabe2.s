@@ -108,10 +108,11 @@ spamfilter:
 		#bltz $v0,endfor
 	#j for
 	#endfor:
-    move $v0, $t2
+    #move $v0, $t2
+	
 	### Rueckgabewert setzen
 	
-#	li $v0, 42
+	li $v0, 42
 	
     ### Register wieder herstellen
     
