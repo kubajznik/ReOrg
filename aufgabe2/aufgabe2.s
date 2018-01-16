@@ -100,13 +100,13 @@ spamfilter:
 		jal find_str				# Komma finden, Position in $v0
 		
 		sub $a0, $a0, $v0
-		sb $a0, 4($sp)
+		sb $a0, 12($sp)
 		addi $a0, 1
-		sb $a0, 5($sp)
+		sb $a0, 13($sp)
 		addi $a0, 1
-		sb $a0, 6($sp)
+		sb $a0, 14($sp)
 		
-		la $a0, 4($sp)
+		la $a0, 12($sp)
 		li $v0, 4
 		syscall
 		### lese und konvertiere Gewicht
