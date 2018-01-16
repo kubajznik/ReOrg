@@ -76,7 +76,7 @@ found_str:
 spamfilter:
     ### Register gemaess Registerkonventionen sichern
 	
-	addi $sp, $sp, -12
+	addi $sp, $sp, -16
 	sw $ra, 0($sp)
 	#move $fp, $ra
     ### Badwords liegen im Puffer badwords_buffer
@@ -117,7 +117,7 @@ spamfilter:
     ### Register wieder herstellen
     
 	lw $ra, 0($sp)
-	addi $sp, $sp, 12
+	addi $sp, $sp, 16
 	#move $ra, $fp
 	
 	jr $ra
