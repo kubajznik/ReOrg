@@ -157,12 +157,12 @@ main:
     move $s0, $v0
 
 
-    li $v0, 4
-    la $a0, spamscore_text
-    syscall
-    move $a0, $s0
-    li $v0, 1
-    syscall
+   # li $v0, 4
+    #la $a0, spamscore_text
+    #syscall
+    #move $a0, $s0
+    #li $v0, 1
+    #syscall
 
     li $v0, 11
     li $a0, 10
