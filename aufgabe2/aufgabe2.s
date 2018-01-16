@@ -96,7 +96,7 @@ spamfilter:
 		jr find_str				# Komma finden, Position in $v0
 		
 		addi $v0, 1
-		add $a0, $v0
+		add $a0, $a0, $v0
 		lb $t2, ($a0)			# Text bis Komma laden
 		
 		### lese und konvertiere Gewicht
