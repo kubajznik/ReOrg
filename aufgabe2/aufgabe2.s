@@ -97,7 +97,7 @@ spamfilter:
 		
 		### lese und konvertiere Gewicht
 		
-		addi $v0, 1
+		addi $a0, 1
 		#add $a0, $a0, $v0
 		lb $t1, ($a0)			# Gewicht laden
 				
