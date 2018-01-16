@@ -98,8 +98,8 @@ spamfilter:
 		lb $t1, 4($a0)			# Text bis Komma laden
 		
 		### lese und konvertiere Gewicht
-		#add $a0, $a0, $v0
-		#addi $a0, 1
+		add $a0, $a0, $v0
+		addi $a0, 1
 		
 		lb $t2, 0($a0)
 		andi $t2, $t2, 0x0F
@@ -112,7 +112,7 @@ spamfilter:
 	
 	### Rueckgabewert setzen
 	
-	li $v0, 32
+	
 	
     ### Register wieder herstellen
     
@@ -138,7 +138,7 @@ size: .word 538
 badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,10,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
 badwords_size: .word 93
 
-badwords_sep: .asciiz "G"
+badwords_sep: .asciiz ","
 
 spamscore_text: .asciiz "Der Spamscore betraegt: "
 
@@ -163,7 +163,7 @@ main:
     li $v0, 4
     la $a0, spamscore_text
     syscall
-    move $a0, $s0
+    move $a0, $t2
     li $v0, 1
     syscall
 
