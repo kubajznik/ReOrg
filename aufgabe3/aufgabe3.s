@@ -125,7 +125,7 @@ print_email:
 		la $a0, email_buffer
 		add $a0, $a0, $t3
 		move $a1, $t2
-		addi $a1, -292
+		sub $a1, $a1, $t3
 		jal write_email
 		
 	
