@@ -85,14 +85,16 @@ spamfilter:
     ### Schleife ueber Bad words (wort1,gewicht1,wort2,gewicht2,...)
 
 
-	
-	#for:    
-		### lese ein Wort
+	li $s5, 0
+
 		la $a0, badwords_buffer
 		lw $a1, badwords_size
 		la $a2, badwords_sep
 		li $a3, 1
 	
+	for:    
+		### lese ein Wort
+
 		jal find_str				# Komma finden, Position in $v0
 		
 		### lese und konvertiere Gewicht
@@ -102,13 +104,16 @@ spamfilter:
 		lb $t1, ($a0)			# Gewicht laden
 				
 		addi $t1, -48		# In int umrechnen
-		move $v0, $t1
+		add $s5, $s5, $t1
 		
+		jal find_str
+		add $a0, $a0, $v0
+		addi $a0, 1
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
-		#bltz $v0,endfor
-	#j for
-	#endfor:
-    #move $v0, $t2
+		bltz $v0, endfor
+	j for
+	endfor:
+    move $v0, $s5
 	
 	### Rueckgabewert setzen
 	
