@@ -97,8 +97,8 @@ spamfilter:
 	
 	la $a0, email_buffer
 	lw $a1, size
-	la $a2, $a0
-	la $a3, $v0
+	move $a2, $a0
+	move $a3, $v0
 	
 	jal find_str
 	
