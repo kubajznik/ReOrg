@@ -96,15 +96,16 @@ spamfilter:
 		li $a3, 1
 	
 		jr find_str
-		bltz $v0,endfor
+		
 		move $t1, $v0
-		lb $a0, 4($a0)
+		lb $t3, 4($a0)
 		
 		li $v0, 4
-		#lb $a0, $t3
+		lb $a0, 0($t3)
 		syscall
 		### lese und konvertiere Gewicht
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
+		bltz $v0,endfor
 	j for
 	endfor:
     move $v0, $t1
