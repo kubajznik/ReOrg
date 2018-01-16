@@ -97,14 +97,14 @@ spamfilter:
 		
 		addi $v0, 1
 		add $a0, $a0, $v0
-		lb $a3, ($a0)			# Text bis Komma laden
+		lb $t1, ($a0)			# Text bis Komma laden
 		
 		### lese und konvertiere Gewicht
 		
 		
 		
-		andi $s3, $a3, 0x0F
-		#move $v0, $t2
+		andi $t1, $t1, 0x0F
+		move $v0, $t1
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 		#bltz $v0,endfor
 	#j for
@@ -158,7 +158,7 @@ main:
 
 
     jal spamfilter
-    move $s0, $s3
+    move $s0, $v0
 
 
     li $v0, 4
