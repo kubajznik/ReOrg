@@ -86,6 +86,7 @@ spamfilter:
 
 
 	li $s5, 0
+	li $t3, 5
 
 		la $a0, badwords_buffer
 		lw $a1, badwords_size
@@ -110,7 +111,8 @@ spamfilter:
 		add $a0, $a0, $v0
 		addi $a0, 1
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
-		bltz $v0, endfor
+		addi $t3, -1
+		bltz $t3, endfor
 	j for
 	endfor:
     move $v0, $s5
