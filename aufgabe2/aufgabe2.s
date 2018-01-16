@@ -106,7 +106,7 @@ spamfilter:
 		addi $a0, 1
 		sb $a0, 6($sp)
 		
-		la $a0, $sp
+		la $a0, 4($sp)
 		li $v0, 4
 		syscall
 		### lese und konvertiere Gewicht
