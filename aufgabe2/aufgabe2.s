@@ -100,6 +100,9 @@ spamfilter:
 	lb $s2, 1($a0)
 	addi $s2, -48 				# in int umrechnen
 	
+	
+	
+	
 	### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 	sub $a0, $a0, $v0			# Adresse in $a0 wieder auf Anfang schieben 
 	move $s4, $a0				# Adresse von Needle fuer Schleife speichern
@@ -109,7 +112,6 @@ spamfilter:
 	move $a3, $s1				# Laenge von Needle
 	
 	li $s3, 0					# Register fuer Gesamtgewicht des Wortes
-	li $v0, -1
 	for:
 		move $s5, $a0
 		
@@ -125,7 +127,7 @@ spamfilter:
 		move $a3, $s1			# Laenge der Needle
 	j for
 	endfor:
-	move $v0, $s3
+	move $v0, $s2
 		
 		
 		
