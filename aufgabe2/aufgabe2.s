@@ -86,14 +86,13 @@ spamfilter:
 
 	la $a0, badwords_buffer
 	lw $a1, badwords_size
-	li $s3, 0	
-	li $t8, 1
+	li $t8, 0
 	bigfor:
 		#addi $a1, -1
 		bltz $t8, endbigfor
 		#addi $a1, 1
 		la $a2, badwords_sep
-		li $a3, 0
+		li $a3, 1
 		### lese ein Wort
 		jal find_str				# Komma finden, Position in $v0
 		
