@@ -93,17 +93,16 @@ spamfilter:
 		la $a2, badwords_sep
 		li $a3, 1
 	
-		jr find_str				# Komma finden, Position in $v0
+		#jr find_str				# Komma finden, Position in $v0
 		
-		lb $t2, 5($a0)			# Text bis Komma laden
+		lb $t2, ($a0)			# Text bis Komma laden
 		
 		### lese und konvertiere Gewicht
-		#add $a0, $a0, $v0
-		#addi $a0, 1
 		
-		#lw $t2, 0($a0)
+		
+		
 		andi $t2, $t2, 0x0F
-
+		move $v0, $t2
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 		#bltz $v0,endfor
 	#j for
@@ -163,7 +162,7 @@ main:
     li $v0, 4
     la $a0, spamscore_text
     syscall
-    move $a0, $t2
+    move $a0, $s0
     li $v0, 1
     syscall
 
