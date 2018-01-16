@@ -112,7 +112,7 @@ spamfilter:
 	
 	### Rueckgabewert setzen
 	
-	li $v0, 42
+	li $v0, 32
 	
     ### Register wieder herstellen
     
