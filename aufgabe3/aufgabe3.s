@@ -109,7 +109,7 @@ print_email:
 	
 	li $t1, 0
 	beq $a3, $t1, nospam
-		lw $a1, $a2
+		move $a1, $a2
 		jal write_email
 	
 	
