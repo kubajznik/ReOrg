@@ -93,7 +93,7 @@ spamfilter:
 		bltz $t8, endbigfor
 		#addi $a1, 1
 		la $a2, badwords_sep
-		li $a3, 1
+		li $a3, 0
 		### lese ein Wort
 		jal find_str				# Komma finden, Position in $v0
 		
