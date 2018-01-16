@@ -121,19 +121,20 @@ spamfilter:
 		move $a3, $s1				# Laenge von Needle
 		
 		for:
-			#move $s5, $a0			# Startadresse fuer naechste Suche speichern
+			move $s5, $a0			# Startadresse fuer naechste Suche speichern
 			
 			jal find_str			# Nach Badword suchen
 			
 			bltz $v0, endfor		# Wenn keins gefunden, abbrechen
 			
 			add $s3, $s3, $s2		# Sonst Gewicht addieren
-
+			
+			sub $s5, $a0, $s5
 			#add $a0, $a0, $s1		# Adresse bis zum aktuellen Fund vorschieben
 			#addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
 			
 			lw $a1, size			# Laenge der E-Mail
-			sub $a1, $a1, $v0
+			sub $a1, $a1, $s5
 			
 			move $a2, $s4			# Adresse der Needle
 			
