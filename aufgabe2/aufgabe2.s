@@ -109,7 +109,7 @@ spamfilter:
 	move $a3, $s1				# Laenge von Needle
 	
 	li $s3, 0					# Register fuer Gesamtgewicht des Wortes
-	
+	li $s6, 0
 	for:
 		move $s5, $a0
 		
@@ -117,7 +117,7 @@ spamfilter:
 		
 		bltz $v0, endfor		# Wenn keins gefunden, abbrechen
 		add $s3, $s3, $s2		# Sonst Gewicht addieren
-		
+		addi $s6, 1
 		add $a0, $s5, $v0
 		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
 		lw $a1, size			# Laenge der E-Mail
@@ -125,7 +125,7 @@ spamfilter:
 		move $a3, $s1			# Laenge der Needle
 	j for
 	endfor:
-	move $v0, $s3
+	move $v0, $s6
 		
 		
 		
