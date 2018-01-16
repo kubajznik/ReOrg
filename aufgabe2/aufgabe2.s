@@ -84,31 +84,24 @@ spamfilter:
    
     ### Schleife ueber Bad words (wort1,gewicht1,wort2,gewicht2,...)
 
-
-	li $s5, 0
-
-	la $a0, badwords_buffer
-	lw $a1, badwords_size
 	
-	#for:    
-	
-	la $a2, badwords_sep
-	li $a3, 1
 
 	### lese ein Wort
-		move $t2, $a1
-		jal find_str				# Komma finden, Position in $v0
+	la $a0, badwords_buffer
+	lw $a1, badwords_size
+	la $a2, badwords_sep
+	li $a3, 1	
+	jal find_str				# Komma finden, Position in $v0
 		
-		sub $a0, $a0, $v0
-		sb $a0, 12($sp)
-		addi $a0, 1
-		sb $a0, 13($sp)
-		addi $a0, 1
-		sb $a0, 14($sp)
-		
-		la $a0, 12($sp)
-		li $v0, 4
-		syscall
+	sub $a0, $a0, $v0
+	
+	la $a0, email_buffer
+	lw $a1, size
+	la $a2, $a0
+	la $a3, $v0
+	
+	jal find_str
+	
 		### lese und konvertiere Gewicht
 		
 		#addi $a0, 1
