@@ -120,6 +120,8 @@ spamfilter:
 		addi $s6, 1
 		add $a0, $s5, $v0
 		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
+		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
+		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
 		lw $a1, size			# Laenge der E-Mail
 		move $a2, $s4			# Adrese der Needle
 		move $a3, $s1			# Laenge der Needle
