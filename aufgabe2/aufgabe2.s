@@ -117,12 +117,14 @@ spamfilter:
 		
 		jal find_str			# Nach Badword suchen
 		
-		bltz $v0, endfor			# Wenn keins gefunden, abbrechen
+		bltz $v0, endfor		# Wenn keins gefunden, abbrechen
 		add $s3, $s3, $s2		# Sonst Gewicht addieren
 
 		add $a0, $s5, $v0		# Adrese bis zum aktuellen Fund vorschieben
 		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
 		lw $a1, size			# Laenge der E-Mail
+		sub $a1, $a1, $v0
+		addi $a1, -1
 		move $a2, $s4			# Adrese der Needle
 		move $a3, $s1			# Laenge der Needle
 		j for
@@ -158,6 +160,7 @@ spamfilter:
 	
 	jr $ra
 
+	
 #########################################
 #
 
@@ -171,7 +174,7 @@ email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es 
 
 size: .word 538
 
-badwords_buffer: .asciiz "Spam,4,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,10,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
+badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,10,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
 badwords_size: .word 93
 
 badwords_sep: .asciiz ","
