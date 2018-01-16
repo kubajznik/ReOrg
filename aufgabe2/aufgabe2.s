@@ -93,7 +93,7 @@ spamfilter:
 		la $a2, badwords_sep
 		li $a3, 1
 	
-		jr find_str				# Komma finden, Position in $v0
+		jal find_str				# Komma finden, Position in $v0
 		
 		addi $v0, 1
 		add $a0, $a0, $v0
