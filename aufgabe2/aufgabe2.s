@@ -95,7 +95,8 @@ spamfilter:
 	
 		#jr find_str				# Komma finden, Position in $v0
 		
-		lb $t2, 41($a0)			# Text bis Komma laden
+		li $t4, 5
+		lb $t2, $t4($a0)			# Text bis Komma laden
 		
 		### lese und konvertiere Gewicht
 		
@@ -134,7 +135,7 @@ email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es 
 
 size: .word 538
 
-badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,20,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
+badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,10,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
 badwords_size: .word 93
 
 badwords_sep: .asciiz ","
