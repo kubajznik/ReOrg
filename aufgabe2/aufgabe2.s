@@ -86,7 +86,7 @@ spamfilter:
 
 	la $a0, badwords_buffer
 	lw $a1, badwords_size
-	li $s7, 0	
+	li $s3, 0	
 	bigfor:
 		addi $a1, -1
 		bltz $a1, endbigfor
@@ -109,12 +109,17 @@ spamfilter:
 
 		sub $a0, $a0, $v0			# Adresse in $a0 wieder auf Anfang schieben 
 		move $s4, $a0				# Adresse von Needle fuer Schleife speichern
+		
+		move $s7, $a1				# Laenge von Badword Liste anpassen,  
+		sub $s7, $s7, $v0			# wird erst fuer den naechsten Durchlauf der
+		li $s6, 3					# großen Schleife benoetigt.
+		sub $s7, $s7, $s6			#
+		
 		la $a0, email_buffer		# Adresse von E-Mail
 		lw $a1, size				# Laenge von E-Mail
 		move $a2, $s4				# Adresse der Needle
 		move $a3, $s1				# Laenge von Needle
 		
-		li $s3, 0					# Register fuer Gesamtgewicht des Wortes
 		for:
 			move $s5, $a0
 			
@@ -124,25 +129,22 @@ spamfilter:
 			
 			add $s3, $s3, $s2		# Sonst Gewicht addieren
 
-			add $a0, $s5, $v0		# Adrese bis zum aktuellen Fund vorschieben
+			add $a0, $s5, $v0		# Adresse bis zum aktuellen Fund vorschieben
 			addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
 			
 			lw $a1, size			# Laenge der E-Mail
 			sub $a1, $a1, $v0
-			#addi $a1, -1
 			
-			move $a2, $s4			# Adrese der Needle
+			move $a2, $s4			# Adresse der Needle
 			
 			move $a3, $s1			# Laenge der Needle
 			
 			j for
 		endfor:
 		
-		move $s7, $s3
-		
-		li $s6, 3
-		la $a0, badwords_buffer
-		add $a0, $s1, $s6
+		move $a0, $s4
+		add $a0, $a0, $s1
+		add $a0, $a0, $s6		# $s6=3 kommt von weiter oben
 		lw $a1, badwords_size
 		sub $a1, $a1, $s1
 		sub $a1, $a1, $s6
@@ -150,7 +152,7 @@ spamfilter:
 		j bigfor
 	endbigfor:	
 		
-	move $v0, $s7
+	move $v0, $s3
 		
 		
 		
