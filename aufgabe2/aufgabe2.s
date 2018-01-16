@@ -98,8 +98,8 @@ spamfilter:
 		lb $t1, 4($a0)			# Text bis Komma laden
 		
 		### lese und konvertiere Gewicht
-		add $a0, $a0, $v0
-		addi $a0, 1
+		#add $a0, $a0, $v0
+		#addi $a0, 1
 		
 		lb $t2, 0($a0)
 		andi $t2, $t2, 0x0F
