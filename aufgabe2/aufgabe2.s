@@ -118,15 +118,20 @@ spamfilter:
 		jal find_str			# Nach Badword suchen
 		
 		bltz $v0, endfor		# Wenn keins gefunden, abbrechen
+		
 		add $s3, $s3, $s2		# Sonst Gewicht addieren
 
 		add $a0, $s5, $v0		# Adrese bis zum aktuellen Fund vorschieben
 		addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
+		
 		lw $a1, size			# Laenge der E-Mail
 		sub $a1, $a1, $v0
-		addi $a1, -1
+		#addi $a1, -1
+		
 		move $a2, $s4			# Adrese der Needle
+		
 		move $a3, $s1			# Laenge der Needle
+		
 		j for
 	endfor:
 	move $v0, $s3
