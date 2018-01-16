@@ -101,7 +101,7 @@ spamfilter:
 		add $a0, $a0, $v0
 		addi $a0, 1
 		
-		lb $t2, 0($a0)
+		lw $t2, 0($a0)
 		andi $t2, $t2, 0x0F
 
         ### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
