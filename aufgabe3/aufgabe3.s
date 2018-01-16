@@ -112,12 +112,12 @@ print_email:
 		move $a1, $a2
 		jal write_email
 	
-	
+	j spam:
 	nospam:
 	
 	li $a2, 1
 	jal write_email
-
+	spam:
 		
     ### gesicherte Register wieder herstellen
     lw $ra, 0($sp)
