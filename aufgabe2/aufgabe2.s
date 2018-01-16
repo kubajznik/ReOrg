@@ -112,7 +112,7 @@ spamfilter:
 	
 	### Rueckgabewert setzen
 	
-	li $v0, 32
+	#li $v0, 32
 	
     ### Register wieder herstellen
     
@@ -138,7 +138,7 @@ size: .word 538
 badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,10,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
 badwords_size: .word 93
 
-badwords_sep: .asciiz ","
+badwords_sep: .asciiz "G"
 
 spamscore_text: .asciiz "Der Spamscore betraegt: "
 
