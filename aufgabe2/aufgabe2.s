@@ -93,9 +93,10 @@ spamfilter:
 		la $a2, badwords_sep
 		li $a3, 1
 	
-		#jr find_str				# Komma finden, Position in $v0
+		jr find_str				# Komma finden, Position in $v0
 		
-		addi $a0, 12
+		addi $v0, 1
+		add $a0, $v0
 		lb $t2, ($a0)			# Text bis Komma laden
 		
 		### lese und konvertiere Gewicht
