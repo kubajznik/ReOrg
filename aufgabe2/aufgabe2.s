@@ -129,8 +129,8 @@ spamfilter:
 			
 			add $s3, $s3, $s2		# Sonst Gewicht addieren
 
-			#add $a0, $s5, $v0		# Adresse bis zum aktuellen Fund vorschieben
-			#addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
+			#add $a0, $a0, $s1		# Adresse bis zum aktuellen Fund vorschieben
+			addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
 			
 			lw $a1, size			# Laenge der E-Mail
 			sub $a1, $a1, $v0
