@@ -98,7 +98,7 @@ spamfilter:
 		jr find_str
 		bltz $v0,endfor
 		move $t1, $v0
-		lb $t3, $t1($a0)
+		lb $t3, 4($a0)
 		li $v0, 4
 		move $a0, $t3
 		syscall
