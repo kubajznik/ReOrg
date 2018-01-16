@@ -107,10 +107,18 @@ print_email:
 	
     ### hier implementieren
 	
+	li $t1, 0
+	beq $a3, $t1, nospam
+		lw $a1, $a2
+		jal write_email
+	
+	
+	nospam:
+	
 	li $a2, 1
 	jal write_email
-	
-	
+
+		
     ### gesicherte Register wieder herstellen
     lw $ra, 0($sp)
 	addi $sp, $sp, 8
