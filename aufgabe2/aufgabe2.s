@@ -95,9 +95,9 @@ spamfilter:
 		
 	addi $a0, -4
 	
+	move $a2, $a0
 	la $a0, email_buffer
 	lw $a1, size
-	move $a2, $a0
 	li $a3, 4
 	
 	jal find_str
