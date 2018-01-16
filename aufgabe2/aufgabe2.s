@@ -104,14 +104,13 @@ spamfilter:
 	la $a0, email_buffer
 	lw $a1, size
 	move $a3, $v0
-	li $t3, 5					# Register fuer Gesamtgewicht des Wortes
+	li $t3, 0					# Register fuer Gesamtgewicht des Wortes
 	for:
-		#jal find_str
-		#bltz $v0, endfor
-		#add $t3, $t3, $t2
-		#addi $a0, 1
-		bltz $t3, endfor
-		addi $t3, -1
+		jal find_str
+		addi $a0, 1
+		bltz $v0, endfor
+		add $t3, $t3, $t2
+		
 	j for
 	endfor:
 	
