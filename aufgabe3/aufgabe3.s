@@ -112,7 +112,7 @@ print_email:
 		move $a1, $a2
 		jal write_email
 	
-	j spam:
+	j spam
 	nospam:
 	
 	li $a2, 1
