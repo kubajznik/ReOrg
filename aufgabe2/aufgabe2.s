@@ -154,6 +154,7 @@ spamfilter:
 		sub $a1, $a1, $s6
 		
 		move $s5, $a0
+		move $a0, $a1
 		li $v0, 1
 		syscall
 		
