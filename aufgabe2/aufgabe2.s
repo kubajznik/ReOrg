@@ -98,10 +98,10 @@ spamfilter:
 		### lese ein Wort
 		jal find_str			# Komma finden, Position in $v0
 		move $s1, $v0			# Needlelaenge sichern
+		move $t8, $a0
 		
 		### lese und konvertiere Gewicht
-		move $t8, $a0
-		add $a0, $a0, $s1
+		addi $a0, 1
 		move $a1, $s7
 		sub $a1, $a1, $s1
 		la $a2, badwords_sep	# Trennzeichen ist immer Komma
