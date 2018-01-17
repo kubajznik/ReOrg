@@ -111,6 +111,10 @@ spamfilter:
 		li $v0, 1
 		syscall
 		
+		move $a0, badwords_sep
+		li $v0, 4
+		syscall
+		
 		move $a0, $t8
 		lb $s2, 1($a0)
 		addi $s2, -48 			# in int umrechnen
