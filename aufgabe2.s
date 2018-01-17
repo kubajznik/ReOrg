@@ -75,9 +75,14 @@ found_str:
 
 spamfilter:
     ### Register gemaess Registerkonventionen sichern
-
+	move $fp, $ra
     ### Badwords liegen im Puffer badwords_buffer
     ### Der Text der E-Mail liegt im Puffer email_buffer
+   la $a0, email_buffer
+   lw $a1, size
+   la $a2, badwords_buffer
+   lw $a3, badwords_size
+   jal find_str
    
     ### Schleife ueber Bad words (wort1,gewicht1,wort2,gewicht2,...)
         ### lese ein Wort
@@ -86,7 +91,8 @@ spamfilter:
 
     ### Rueckgabewert setzen
     ### Register wieder herstellen
-    jr $ra
+    move $ra, $fp
+	jr $ra
 
 #########################################
 #
@@ -101,8 +107,8 @@ email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es 
 
 size: .word 538
 
-badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,10,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
-badwords_size: .word 93
+badwords_buffer: .asciiz "Spam"#,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,10,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
+badwords_size: .word 4#93
 
 spamscore_text: .asciiz "Der Spamscore betraegt: "
 
