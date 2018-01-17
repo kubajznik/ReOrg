@@ -120,17 +120,47 @@ spamfilter:
 			move $a0, $t8
 			lb $s2, 1($a0)
 			addi $s2, -48 			# in int umrechnen
+				########
+				move $a0, $s2
+				li $v0, 1
+				syscall
+				
+				la $a0, badwords_sep
+				li $v0, 4
+				syscall
+				######
+			
 			li $t9, 10
 			mult $s2, $t9
-			mfhi $s2
+			mflo $s2
+			
+				#######
+				move $a0, $s2
+				li $v0, 1
+				syscall
+				
+				la $a0, badwords_sep
+				li $v0, 4
+				syscall
+				##########
 			lb $t9, 2($a0)
 			addi $t9, -48
-			add $s2, $s2, $t9
+			
+				move $a0, $t9
+				li $v0, 1
+				syscall
+				
+				la $a0, badwords_sep
+				li $v0, 4
+				syscall
+			
+			
+			#add $s2, $s2, $t9
 		weiter:
 		
 		
 		
-		
+		move $a0, t8
 		
 		### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 		sub $a0, $a0, $s1		# Adresse in $a0 wieder auf Anfang schieben 
