@@ -101,7 +101,7 @@ spamfilter:
 		move $t8, $a0
 		
 		### lese und konvertiere Gewicht
-		#addi $a0, 1				# Adresse
+		addi $a0, 1				# Adresse
 		move $a1, $s7
 		sub $a1, $a1, $s1
 		addi $a1, -1
@@ -109,7 +109,7 @@ spamfilter:
 		li $a3, 1	
 		jal find_str
 		move $t7, $v0
-		move $t6, $a0
+		#move $t6, $a0
 	
 				move $a0, $t7
 				li $v0, 1
@@ -126,6 +126,7 @@ spamfilter:
 		#lb $s2, 1($a0)
 		#addi $s2, -48 			# in int umrechnen
 		li $s2, 10
+		li $t6, 3
 		j weiter
 		
 		zweistellig:
@@ -142,11 +143,13 @@ spamfilter:
 			
 			#add $s2, $s2, $t9
 			li $s2, 3
+			li $t6, 4
 		weiter:
 		
 		
 		
 		move $a0, $t8
+		move $t8, $t6
 		
 		### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 		sub $a0, $a0, $s1		# Adresse in $a0 wieder auf Anfang schieben 
@@ -183,12 +186,12 @@ spamfilter:
 		
 		move $a0, $s4			# Adresse des letzten Wortes einlesen
 		add $a0, $a0, $s1		# Wortlaenge dazuaddieren
-		li $s6, 3				# Komma, Zahl, Komma = 3 Stellen
-		add $a0, $a0, $s6		#  und diese dazuaddieren
+		#li $s6, 3				# Komma, Zahl, Komma = 3 Stellen
+		add $a0, $a0, $t8		#  und diese dazuaddieren
 		
 		move $a1, $s7			# Letzte Listenlaenge laden
 		sub $a1, $a1, $s1		# Davon die Wortlaenge abziehen
-		sub $a1, $a1, $s6		# Und nochmal 3 abziehen; Komma,Zahl,Komma
+		sub $a1, $a1, $t8		# Und nochmal 3 abziehen; Komma,Zahl,Komma
 		
 		j bigfor
 	endbigfor:	
