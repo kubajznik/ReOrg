@@ -136,6 +136,15 @@ spamfilter:
 			
 			move $a3, $s1			# Laenge der Needle
 			
+			li $t0, 0
+			li $t1, 0
+			li $t4, 0
+			li $t5, 0
+			li $t6, 0
+			li $t7, 0
+			li $v0, 0
+			
+			
 			j for
 		endfor:
 		
