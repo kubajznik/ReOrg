@@ -120,12 +120,12 @@ spamfilter:
 			move $a0, $t8
 			lb $s2, 1($a0)
 			addi $s2, -48 			# in int umrechnen
-			li $s3, 10
-			mult $s2, $s3
+			li $t9, 10
+			mult $s2, $t9
 			mflo $s2
-			lb $s3, 2($a0)
-			addi $s3, -48
-			add $s2, $s2, $s3
+			lb $t9, 2($a0)
+			addi $t9, -48
+			add $s2, $s2, $t9
 		weiter:
 		
 		
