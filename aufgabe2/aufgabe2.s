@@ -102,9 +102,6 @@ spamfilter:
 		lb $s2, 1($a0)
 		addi $s2, -48 				# in int umrechnen
 		
-		
-		
-		
 		### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 
 		sub $a0, $a0, $v0			# Adresse in $a0 wieder auf Anfang schieben 
@@ -116,22 +113,24 @@ spamfilter:
 		sub $s7, $s7, $s6			#
 		
 		la $a0, email_buffer		# Adresse von E-Mail
+		move $s5, $a0
 		lw $a1, size				# Laenge von E-Mail
 		move $a2, $s4				# Adresse der Needle
 		move $a3, $s1				# Laenge von Needle
 		
 		for:
-			move $s5, $a0			# Startadresse fuer naechste Suche speichern
-			
+					
 			jal find_str			# Nach Badword suchen
 			
 			bltz $v0, endfor		# Wenn keins gefunden, abbrechen
 			
 			add $s3, $s3, $s2		# Sonst Gewicht addieren
 			
-			sub $s5, $a0, $s5
-			#add $a0, $a0, $s1		# Adresse bis zum aktuellen Fund vorschieben
-			addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
+			sub $s5, $a0, $s5		# Adressenunterschied = schon gelesene Zeichen
+			add $s5, $s5, $s1		#  + das Suchwort selbst
+			#addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
+			
+			move $a0, $s5			# Startadresse fuer naechste Suche speichern
 			
 			lw $a1, size			# Laenge der E-Mail
 			sub $a1, $a1, $s5
