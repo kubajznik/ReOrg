@@ -122,6 +122,14 @@ spamfilter:
 			
 			jal find_str			# Nach Badword suchen
 			
+			move $a1, $a0
+			move $a0, $v0
+			li $v0, 1
+			syscall
+			
+			move $v0, $a0
+			move $a0, $a1
+			
 			bltz $v0, endfor		# Wenn keins gefunden, abbrechen
 			
 			add $s3, $s3, $s2		# Sonst Gewicht addieren
