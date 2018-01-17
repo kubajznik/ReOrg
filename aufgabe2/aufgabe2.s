@@ -92,7 +92,7 @@ spamfilter:
 	bigfor:
 		move $s7, $a1
 	
-		bltz $t8, endbigfor
+		bltz $s7, endbigfor
 				
 		la $a2, badwords_sep
 		li $a3, 1
