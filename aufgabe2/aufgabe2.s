@@ -160,7 +160,7 @@ spamfilter:
 		
 		
 		
-		move $a0, t8
+		move $a0, $t8
 		
 		### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 		sub $a0, $a0, $s1		# Adresse in $a0 wieder auf Anfang schieben 
