@@ -79,14 +79,13 @@ spamfilter:
     ### Badwords liegen im Puffer badwords_buffer
     ### Der Text der E-Mail liegt im Puffer email_buffer
    la $a0, email_buffer
-   li $v0, 1
-   syscall
+   move $t1, $a0
    lw $a1, size
    la $a2, badwords_buffer
    lw $a3, badwords_size
    jal find_str
-   move $v0, $a0
-   
+   sub $v0, $a0, $t1
+     
     ### Schleife ueber Bad words (wort1,gewicht1,wort2,gewicht2,...)
         ### lese ein Wort
         ### lese und konvertiere Gewicht
