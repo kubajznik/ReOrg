@@ -104,7 +104,7 @@ spamfilter:
 		addi $s2, -48 			# in int umrechnen
 		
 		### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
-		sub $a0, $a0, $v0		# Adresse in $a0 wieder auf Anfang schieben 
+		sub $a0, $a0, $s1		# Adresse in $a0 wieder auf Anfang schieben 
 		move $s4, $a0			# Adresse von Needle fuer Schleife speichern
 		
 		la $a0, email_buffer	# Adresse von E-Mail
@@ -170,7 +170,7 @@ email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es 
 
 size: .word 538
 
-badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,0,lukrativ,3,Kohlrabi,1,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
+badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,10,lukrativ,3,Kohlrabi,1,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
 badwords_size: .word 92
 
 badwords_sep: .asciiz ","
