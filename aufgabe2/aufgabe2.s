@@ -141,7 +141,7 @@ spamfilter:
 			#addi $t9, -48
 			
 			#add $s2, $s2, $t9
-			li $s2, 5
+			li $s2, 3
 		weiter:
 		
 		
