@@ -138,11 +138,11 @@ spamfilter:
 			
 				move $a0, $t9
 				li $v0, 1
-				syscall
+				#syscall
 				
 				la $a0, badwords_sep
 				li $v0, 4
-				syscall
+				#syscall
 			
 			
 			#add $s2, $s2, $t9
