@@ -122,7 +122,7 @@ spamfilter:
 			addi $s2, -48 			# in int umrechnen
 			li $t9, 10
 			mult $s2, $t9
-			mflo $s2
+			mfhi $s2
 			lb $t9, 2($a0)
 			addi $t9, -48
 			add $s2, $s2, $t9
