@@ -100,6 +100,7 @@ spamfilter:
 		move $s1, $v0			# Needlelaenge sichern
 		
 		### lese und konvertiere Gewicht
+		move $t8, $a0
 		add $a0, $a0, $s1
 		move $a1, $s7
 		sub $a1, $a1, $s1
@@ -110,6 +111,7 @@ spamfilter:
 		li $v0, 1
 		syscall
 		
+		move $a0, $t8
 		lb $s2, 1($a0)
 		addi $s2, -48 			# in int umrechnen
 		
