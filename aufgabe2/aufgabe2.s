@@ -131,7 +131,7 @@ spamfilter:
 			
 			sub $s5, $a0, $s5
 			#add $a0, $a0, $s1		# Adresse bis zum aktuellen Fund vorschieben
-			#addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
+			addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
 			
 			lw $a1, size			# Laenge der E-Mail
 			sub $a1, $a1, $s5
