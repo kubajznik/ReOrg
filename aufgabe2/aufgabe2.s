@@ -96,7 +96,7 @@ spamfilter:
 		### lese ein Wort
 		jal find_str				# Komma finden, Position in $v0
 		
-		move $s1, $v0				# Wortlaenge sichern
+		move $s1, $v0				# Needlelaenge sichern
 		
 		### lese und konvertiere Gewicht
 		lb $s2, 1($a0)
@@ -113,25 +113,22 @@ spamfilter:
 		sub $s7, $s7, $s6			#
 		
 		la $a0, email_buffer		# Adresse von E-Mail
-		move $s5, $a0
 		lw $a1, size				# Laenge von E-Mail
 		move $a2, $s4				# Adresse der Needle
 		move $a3, $s1				# Laenge von Needle
 		
 		for:
-					
+			move $s5, $a0
+			
 			jal find_str			# Nach Badword suchen
 			
 			bltz $v0, endfor		# Wenn keins gefunden, abbrechen
 			
 			add $s3, $s3, $s2		# Sonst Gewicht addieren
 			
-			sub $s5, $a0, $s5		# Adressenunterschied = schon gelesene Zeichen
-			add $s5, $s5, $s1		#  + das Suchwort selbst
-			#addi $a0, 1				# Adresse schieben, um naechstes Badword zu suchen
+			add $a0, $a0, $s1		# Startadresse fuer naechste Suche speichern
 			
-			move $a0, $s5			# Startadresse fuer naechste Suche speichern
-			
+			sub $s5, $a0, $s5
 			lw $a1, size			# Laenge der E-Mail
 			sub $a1, $a1, $s5
 			
