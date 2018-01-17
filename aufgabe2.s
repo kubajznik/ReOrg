@@ -84,8 +84,8 @@ spamfilter:
    la $a2, badwords_buffer
    lw $a3, badwords_size
    jal find_str
-   sub $v0, $a0, $t1
-     
+   #sub $v0, $a0, $t1
+    move $v0, $t1 
     ### Schleife ueber Bad words (wort1,gewicht1,wort2,gewicht2,...)
         ### lese ein Wort
         ### lese und konvertiere Gewicht
