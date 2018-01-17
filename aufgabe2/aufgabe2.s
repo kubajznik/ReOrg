@@ -107,6 +107,15 @@ spamfilter:
 		la $a2, badwords_sep	# Trennzeichen ist immer Komma
 		li $a3, 1	
 		jal find_str
+		move $t7, $v0
+				move $a0, $t7
+				li $v0, 1
+				syscall
+				
+				la $a0, badwords_sep
+				li $v0, 4
+				syscall		
+		move $v0, $t7
 		
 		li $t9, 1
 		bgt $v0, $t9, zweistellig
