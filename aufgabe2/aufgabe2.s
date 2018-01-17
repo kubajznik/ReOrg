@@ -122,28 +122,30 @@ spamfilter:
 		li $t9, 1
 		bgt $t7, $t9, zweistellig
 		
-		#move $a0, $t8
-		#lb $s2, 1($a0)
-		#addi $s2, -48 			# in int umrechnen
-		li $s2, 10
+		move $a0, $t8
+		lb $s2, 1($a0)
+		addi $s2, -48 			# in int umrechnen
+		
 		li $t6, 3
+		
 		j weiter
 		
 		zweistellig:
-			#move $a0, $t8
-			#lb $s2, 1($a0)
-			#addi $s2, -48 			# in int umrechnen
-			#li $t9, 10
-			#mult $s2, $t9
-			#mflo $s2
+			move $a0, $t8
+			lb $s2, 1($a0)
+			addi $s2, -48 			# in int umrechnen
+			li $t9, 10
+			mult $s2, $t9
+			mflo $s2
 			
-			#move $a0, $t8
-			#lb $t9, 2($a0)
-			#addi $t9, -48
+			move $a0, $t8
+			lb $t9, 2($a0)
+			addi $t9, -48
 			
-			#add $s2, $s2, $t9
-			li $s2, 3
+			add $s2, $s2, $t9
+			
 			li $t6, 4
+			
 		weiter:
 		
 		
