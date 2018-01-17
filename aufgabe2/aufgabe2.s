@@ -119,25 +119,19 @@ spamfilter:
 		
 		for:
 			move $s5, $a0
+			move $s6, $a1
 			
 			jal find_str			# Nach Badword suchen
-			
-			move $a1, $a0
-			move $a0, $v0
-			li $v0, 1
-			syscall
-			
-			move $v0, $a0
-			move $a0, $a1
 			
 			bltz $v0, endfor		# Wenn keins gefunden, abbrechen
 			
 			add $s3, $s3, $s2		# Sonst Gewicht addieren
 			
-			add $a0, $s5, $v0		# Startadresse fuer naechste Suche speichern
+			move $a0, $s5
+			add $a0, $a0, $v0
 			addi $a0, 1
 			
-			lw $a1, size			# Laenge der E-Mail
+			move $a1, $s6
 			sub $a1, $a1, $v0
 			addi $a1, -1
 			
@@ -159,6 +153,7 @@ spamfilter:
 		
 		move $a0, $s4
 		add $a0, $a0, $s1
+		li $s6, 3
 		add $a0, $a0, $s6		# $s6=3 kommt von weiter oben
 		lw $a1, badwords_size
 		sub $a1, $a1, $s1
