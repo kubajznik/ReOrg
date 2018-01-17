@@ -108,6 +108,7 @@ spamfilter:
 		li $a3, 1	
 		jal find_str
 		move $t7, $v0
+	
 				move $a0, $t7
 				li $v0, 1
 				syscall
@@ -133,6 +134,7 @@ spamfilter:
 			mult $s2, $t9
 			mflo $s2
 			
+			move $a0, $t8
 			lb $t9, 2($a0)
 			addi $t9, -48
 			
