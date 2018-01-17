@@ -100,6 +100,11 @@ spamfilter:
 		move $s1, $v0			# Needlelaenge sichern
 		
 		### lese und konvertiere Gewicht
+		add $a0, $a0, $s1
+		move $a1, $s7
+		sub $a1, $a1, $s1
+		la $a2, badwords_sep	# Trennzeichen ist immer Komma
+		li $a3, 1	
 		jal find_str
 		move $a0, $v0
 		li $v0, 1
