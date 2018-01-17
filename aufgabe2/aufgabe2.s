@@ -125,6 +125,10 @@ spamfilter:
 			li $v0, 1
 			syscall
 			
+			la $a0, badwords_sep
+			li $v0, 4
+			syscall
+			
 			move $a0, $s5
 			
 			
