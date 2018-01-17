@@ -107,10 +107,10 @@ spamfilter:
 		sub $a0, $a0, $v0			# Adresse in $a0 wieder auf Anfang schieben 
 		move $s4, $a0				# Adresse von Needle fuer Schleife speichern
 		
-		move $s7, $a1				# Laenge von Badword Liste anpassen,  
-		sub $s7, $s7, $v0			# wird erst fuer den naechsten Durchlauf der
-		li $s6, 3					# großen Schleife benoetigt.
-		sub $s7, $s7, $s6			#
+		#move $s7, $a1				# Laenge von Badword Liste anpassen,  
+		#sub $s7, $s7, $v0			# wird erst fuer den naechsten Durchlauf der
+		#li $s6, 3					# großen Schleife benoetigt.
+		#sub $s7, $s7, $s6			#
 		
 		la $a0, email_buffer		# Adresse von E-Mail
 		lw $a1, size				# Laenge von E-Mail
