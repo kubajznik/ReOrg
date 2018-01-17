@@ -118,29 +118,30 @@ spamfilter:
 				la $a0, badwords_sep
 				li $v0, 4
 				syscall		
-		move $v0, $t7
-		
+				
 		li $t9, 1
-		bgt $v0, $t9, zweistellig
+		bgt $t7, $t9, zweistellig
 		
-		move $a0, $t8
-		lb $s2, 1($a0)
-		addi $s2, -48 			# in int umrechnen
+		#move $a0, $t8
+		#lb $s2, 1($a0)
+		#addi $s2, -48 			# in int umrechnen
+		li $s2, 10
 		j weiter
 		
 		zweistellig:
-			move $a0, $t8
-			lb $s2, 1($a0)
-			addi $s2, -48 			# in int umrechnen
-			li $t9, 10
-			mult $s2, $t9
-			mflo $s2
+			#move $a0, $t8
+			#lb $s2, 1($a0)
+			#addi $s2, -48 			# in int umrechnen
+			#li $t9, 10
+			#mult $s2, $t9
+			#mflo $s2
 			
-			move $a0, $t8
-			lb $t9, 2($a0)
-			addi $t9, -48
+			#move $a0, $t8
+			#lb $t9, 2($a0)
+			#addi $t9, -48
 			
-			add $s2, $s2, $t9
+			#add $s2, $s2, $t9
+			li $s2, 5
 		weiter:
 		
 		
