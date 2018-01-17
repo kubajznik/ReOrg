@@ -138,16 +138,7 @@ spamfilter:
 			move $a2, $s4			# Adresse der Needle
 			
 			move $a3, $s1			# Laenge der Needle
-			
-			li $t0, 0
-			li $t1, 0
-			li $t4, 0
-			li $t5, 0
-			li $t6, 0
-			li $t7, 0
-			li $v0, 0
-			
-			
+
 			j for
 		endfor:
 		
@@ -203,7 +194,7 @@ spamfilter:
 
 .data
 
-email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es sich nicht um Spam Spam Spam sondern ich moechte Ihnen\nvielmehr ein lukratives Angebot Spam machen: Mein entfernter Onkel hat mir mehr Geld\nhinterlassen als in meine Geldboerse passt. Ich muss Ihnen also etwas abgeben.\nVorher muss ich nur noch einen Spezialumschlag kaufen. Senden Sie mir noch\nheute BTC 1,000 per Western-Union und ich verspreche hoch und heilig Ihnen\nalsbald den gerechten Teil des Vermoegens zu vermachen.\n\nHochachtungsvoll\nAchim Mueller\nSekretaer fuer Vermoegensangelegenheiten\n"
+email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es sich nicht um Spam sondern ich moechte Ihnen\nvielmehr ein lukratives Angebot machen: Mein entfernter Onkel hat mir mehr Geld\nhinterlassen als in meine Geldboerse passt. Ich muss Ihnen also etwas abgeben.\nVorher muss ich nur noch einen Spezialumschlag kaufen. Senden Sie mir noch\nheute BTC 1,000 per Western-Union und ich verspreche hoch und heilig Ihnen\nalsbald den gerechten Teil des Vermoegens zu vermachen.\n\nHochachtungsvoll\nAchim Mueller\nSekretaer fuer Vermoegensangelegenheiten\n"
 
 size: .word 538
 
