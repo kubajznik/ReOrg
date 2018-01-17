@@ -101,16 +101,15 @@ spamfilter:
 		move $t8, $a0
 		
 		### lese und konvertiere Gewicht
-		addi $a0, 1				# Adresse
-		move $a1, $s7
-		sub $a1, $a1, $s1
-		addi $a1, -1
+		addi $a0, 1				# Adresse hinter das Kommas schieben
+		move $a1, $s7			# Aktuelle Listenlaenge einlesen
+		sub $a1, $a1, $s1		# Davon die Wortlaenge abziehen
+		addi $a1, -1			# -1 wegen der +1 oben
 		la $a2, badwords_sep	# Trennzeichen ist immer Komma
-		li $a3, 1	
-		jal find_str
-		move $t7, $v0
-		#move $t6, $a0
-	
+		li $a3, 1				# Komma ist 1 lang
+		
+		jal find_str			# zweites Komma finden
+		move $t7, $v0			# Laenge der Zahl sichern
 				move $a0, $t7
 				li $v0, 1
 				syscall
@@ -119,32 +118,34 @@ spamfilter:
 				li $v0, 4
 				syscall		
 				
-		li $t9, 1
-		bgt $t7, $t9, zweistellig
+		li $t9, 1				
+		bgt $t7, $t9, zweistellig	# Wenn Zahl mehr als eine Stelle hat, gehe zu zweistellig
 		
-		move $a0, $t8
-		lb $s2, 1($a0)
+		move $a0, $t8			# Adresse vor dem Komma laden
+		lb $s2, 1($a0)			# Byte aus einer Stelle weiter rechts einlesen
 		addi $s2, -48 			# in int umrechnen
 		
-		li $t6, 3
+		li $t6, 3				# Wird spaeter gebraucht, um Adresse und Listenlaenge zu berechnen
+								# Ergibt sich aus Komma + Ziffer + Komma = 3
 		
 		j weiter
 		
 		zweistellig:
-			move $a0, $t8
-			lb $s2, 1($a0)
+			move $a0, $t8			# Adresse vor dem Komma laden
+			lb $s2, 1($a0)			# Byte aus einer Stelle weiter rechts einlesen
 			addi $s2, -48 			# in int umrechnen
 			li $t9, 10
-			mult $s2, $t9
-			mflo $s2
+			mult $s2, $t9			# Multiplizieren mit 10, weil Zehnerstelle
+			mflo $s2				# Ergebnis aus Multiplikation
 			
-			move $a0, $t8
-			lb $t9, 2($a0)
-			addi $t9, -48
+			#move $a0, $t8
+			lb $t9, 2($a0)			# Byte aus zwei Stellen weiter rechts einlesen
+			addi $t9, -48			# in int umrechnen
 			
-			add $s2, $s2, $t9
+			add $s2, $s2, $t9		# Zehner- und Einerstelle addieren
 			
-			li $t6, 4
+			li $t6, 4				# Wird spaeter gebraucht, um Adresse und Listenlaenge zu berechnen
+									# Ergibt sich aus Komma + Ziffer + Ziffer + Komma = 4
 			
 		weiter:
 		
