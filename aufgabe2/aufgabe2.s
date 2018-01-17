@@ -126,9 +126,9 @@ spamfilter:
 			
 			add $s3, $s3, $s2		# Sonst Gewicht addieren
 			
-			add $a0, $a0, $s1		# Startadresse fuer naechste Suche speichern
-			
+			add $a0, $s5, $v0		# Startadresse fuer naechste Suche speichern
 			sub $s5, $a0, $s5
+			addi $a0, 1
 			lw $a1, size			# Laenge der E-Mail
 			sub $a1, $a1, $s5
 			
