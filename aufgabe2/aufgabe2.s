@@ -146,10 +146,10 @@ spamfilter:
 		
 		
 		
-		move $a0, $t6
+		move $a0, $t8
 		
 		### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
-		#sub $a0, $a0, $s1		# Adresse in $a0 wieder auf Anfang schieben 
+		sub $a0, $a0, $s1		# Adresse in $a0 wieder auf Anfang schieben 
 		move $s4, $a0			# Adresse von Needle fuer Schleife speichern
 		
 		la $a0, email_buffer	# Adresse von E-Mail
