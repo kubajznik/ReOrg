@@ -79,120 +79,80 @@ spamfilter:
 	#addi $sp, $sp, -12
 	#sw $ra, 0($sp)
 	move $fp, $ra
-    ### Badwords liegen im Puffer badwords_buffer
+    
+	### Badwords liegen im Puffer badwords_buffer
     ### Der Text der E-Mail liegt im Puffer email_buffer
    
     ### Schleife ueber Bad words (wort1,gewicht1,wort2,gewicht2,...)
-
 	la $a0, badwords_buffer
 	lw $a1, badwords_size
 	
-	li $t8, 9
-	
 	bigfor:
-		move $s7, $a1
+		move $s7, $a1			# Aktuelle Laenge der Liste sichern
 	
-		bltz $s7, endbigfor
+		bltz $s7, endbigfor		# Wenn Badwordlistenlaenge -1 (=passiert nach dem letzten Wort, weil kein Komma am Ende der Liste), Schleife abbrechen
 				
-		la $a2, badwords_sep
-		li $a3, 1
+		la $a2, badwords_sep	# Trennzeichen ist immer Komma
+		li $a3, 1				# Kommalaenge ist immer 1
 		
 		### lese ein Wort
-		jal find_str				# Komma finden, Position in $v0
-		move $s1, $v0				# Needlelaenge sichern
+		jal find_str			# Komma finden, Position in $v0
+		move $s1, $v0			# Needlelaenge sichern
 		
 		### lese und konvertiere Gewicht
 		lb $s2, 1($a0)
-		addi $s2, -48 				# in int umrechnen
+		addi $s2, -48 			# in int umrechnen
 		
 		### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
-		sub $a0, $a0, $v0			# Adresse in $a0 wieder auf Anfang schieben 
-		move $s4, $a0				# Adresse von Needle fuer Schleife speichern
+		sub $a0, $a0, $v0		# Adresse in $a0 wieder auf Anfang schieben 
+		move $s4, $a0			# Adresse von Needle fuer Schleife speichern
 		
-		la $a0, email_buffer		# Adresse von E-Mail
-		lw $a1, size				# Laenge von E-Mail
-		move $a2, $s4				# Adresse der Needle
-		move $a3, $s1				# Laenge von Needle
+		la $a0, email_buffer	# Adresse von E-Mail
+		lw $a1, size			# Laenge von E-Mail
+		move $a2, $s4			# Adresse der Needle
+		move $a3, $s1			# Laenge von Needle
 		
 		for:
-			move $s5, $a0
-			move $s6, $a1
-			
-			move $a0, $s5
-			
-			
+			move $s5, $a0			# Neue Startadresse sichern
+			move $s6, $a1			# Neue Laenge sichern
+
 			jal find_str			# Nach Badword suchen
 			
 			bltz $v0, endfor		# Wenn keins gefunden, abbrechen
 			
 			add $s3, $s3, $s2		# Sonst Gewicht addieren
 			
-			move $a0, $s5
-			add $a0, $a0, $v0
-			addi $a0, 1
+			move $a0, $s5			# Letzte Startadresse laden
+			add $a0, $a0, $v0		# Dazu ueberlesene Textlaenge addieren
+			addi $a0, 1				# +1, um nicht das gefundene Wort wieder zu finden
 			
-			move $a1, $s6
-			sub $a1, $a1, $v0
-			addi $a1, -1
+			move $a1, $s6			# Letzte Textlaenge laden
+			sub $a1, $a1, $v0		# Davon die ueberlesene Textlaenge abziehen
+			addi $a1, -1			# -1 wegen der +1 oben
 			
 			move $a2, $s4			# Adresse der Needle
-			
 			move $a3, $s1			# Laenge der Needle
 			
 			j for
 		endfor:
 		
-		move $a0, $s4
-		add $a0, $a0, $s1
+		move $a0, $s4			# Adresse des letzten Wortes einlesen
+		add $a0, $a0, $s1		# Wortlaenge dazuaddieren
 		li $s6, 3				# Komma, Zahl, Komma = 3 Stellen
-		add $a0, $a0, $s6		# $s6=3 kommt von weiter oben
-		move $a1, $s7
-		sub $a1, $a1, $s1
-		sub $a1, $a1, $s6
+		add $a0, $a0, $s6		#  und diese dazuaddieren
 		
-		move $s5, $a0
-		move $a0, $a1
-		li $v0, 1
-		syscall
+		move $a1, $s7			# Letzte Listenlaenge laden
+		sub $a1, $a1, $s1		# Davon die Wortlaenge abziehen
+		sub $a1, $a1, $s6		# Und nochmal 3 abziehen; Komma,Zahl,Komma
 		
-		la $a0, badwords_sep
-		li $v0, 4
-		syscall
-		
-		move $a0, $s5
-		
-		addi $t8, -1
 		j bigfor
 	endbigfor:	
 		
+	### Rueckgabewert setzen
 	move $v0, $s3
 		
-		
-		
-				
-		#sub $t2, $t2, $v0
-		#addi $t2, -1
-		#move $a1, $t2
-		
-       
-	
-	
-	
-	#	bltz $v0, endfor
-	#j for
-	#endfor:
-    #move $v0, $s5
-	
-	### Rueckgabewert setzen
-	
-	
-	
     ### Register wieder herstellen
-    
-	#lw $ra, 0($sp)
-	#addi $sp, $sp, 12
-	
-	move $ra, $fp
+    move $ra, $fp
 	
 	jr $ra
 
