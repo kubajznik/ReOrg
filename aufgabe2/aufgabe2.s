@@ -121,14 +121,6 @@ spamfilter:
 			move $s5, $a0
 			move $s6, $a1
 			
-			move $a0, $a1
-			li $v0, 1
-			syscall
-			
-			la $a0, badwords_sep
-			li $v0, 4
-			syscall
-			
 			move $a0, $s5
 			
 			
@@ -155,11 +147,22 @@ spamfilter:
 		
 		move $a0, $s4
 		add $a0, $a0, $s1
-		li $s6, 3
+		li $s6, 3				# Komma, Zahl, Komma = 3 Stellen
 		add $a0, $a0, $s6		# $s6=3 kommt von weiter oben
 		lw $a1, badwords_size
 		sub $a1, $a1, $s1
 		sub $a1, $a1, $s6
+		
+		move $s5, $a0
+		li $v0, 1
+		syscall
+		
+		la $a0, badwords_sep
+		li $v0, 4
+		syscall
+		
+		move $a0, $s5
+		
 		addi $t8, -1
 		j bigfor
 	endbigfor:	
