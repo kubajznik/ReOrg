@@ -121,6 +121,13 @@ spamfilter:
 			move $s5, $a0
 			move $s6, $a1
 			
+			move $a0, $a1
+			li $v0, 1
+			syscall
+			
+			move $a0, $s5
+			
+			
 			jal find_str			# Nach Badword suchen
 			
 			bltz $v0, endfor		# Wenn keins gefunden, abbrechen
@@ -138,7 +145,7 @@ spamfilter:
 			move $a2, $s4			# Adresse der Needle
 			
 			move $a3, $s1			# Laenge der Needle
-
+			
 			j for
 		endfor:
 		
