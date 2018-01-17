@@ -220,7 +220,7 @@ email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es 
 
 size: .word 538
 
-badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,10,lukrativ,3,Kohlrabi,1,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
+badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,10,lukrativ,3,Kohlrabi,1,Weihnachten,3,Onkel,72,Vermoegen,2,Brief,4,Lotto,3"
 badwords_size: .word 92
 
 badwords_sep: .asciiz ","
