@@ -86,7 +86,7 @@ spamfilter:
 
 	la $a0, badwords_buffer
 	lw $a1, badwords_size
-	li $t8, 0
+	li $t8, 5
 	bigfor:
 		#addi $a1, -1
 		bltz $t8, endbigfor
