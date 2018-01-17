@@ -101,9 +101,10 @@ spamfilter:
 		move $t8, $a0
 		
 		### lese und konvertiere Gewicht
-		addi $a0, -1				# Adresse
+		addi $a0, 1				# Adresse
 		move $a1, $s7
 		sub $a1, $a1, $s1
+		addi $a1, -1
 		la $a2, badwords_sep	# Trennzeichen ist immer Komma
 		li $a3, 1	
 		jal find_str
