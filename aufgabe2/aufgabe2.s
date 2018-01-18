@@ -110,13 +110,6 @@ spamfilter:
 		
 		jal find_str			# zweites Komma finden
 		move $t7, $v0			# Laenge der Zahl sichern
-				move $a0, $t7
-				li $v0, 1
-				syscall
-				
-				la $a0, badwords_sep
-				li $v0, 4
-				syscall		
 				
 		li $t9, 1				
 		bgt $t7, $t9, zweistellig	# Wenn Zahl mehr als eine Stelle hat, gehe zu zweistellig
@@ -151,8 +144,8 @@ spamfilter:
 		
 		
 		
-		move $a0, $t8
-		move $t8, $t6
+		move $a0, $t8			# Register wechseln
+		move $t8, $t6			# Register wechseln
 		
 		### suche alle Vorkommen des Wortes im Text der E-Mail und addiere Gewicht
 		sub $a0, $a0, $s1		# Adresse in $a0 wieder auf Anfang schieben 
@@ -186,25 +179,14 @@ spamfilter:
 			
 			j for
 		endfor:
-
-		move $a1, $s7			# Letzte Listenlaenge laden
-		sub $a1, $a1, $s1		# Davon die Wortlaenge abziehen
-		sub $a1, $a1, $t8		# 3/4 abziehen; Komma,Zahl,Komma
-	
-		move $a0, $s7
-		li $v0, 1
-		syscall
-
-				la $a0, badwords_sep
-				li $v0, 4
-				syscall	
 		
 		move $a0, $s4			# Adresse des letzten Wortes einlesen
 		add $a0, $a0, $s1		# Wortlaenge dazuaddieren
-		add $a0, $a0, $t8		# 3/4 dazuaddieren
+		add $a0, $a0, $t8		# 3 oder 4 abziehen; Komma + Ziffer + (Ziffer) + Komma
 		
-		
-
+		move $a1, $s7			# Letzte Listenlaenge laden
+		sub $a1, $a1, $s1		# Davon die Wortlaenge abziehen
+		sub $a1, $a1, $t8		# 3 oder 4 abziehen; Komma + Ziffer + (Ziffer) + Komma		
 		
 		j bigfor
 	endbigfor:	
@@ -231,8 +213,8 @@ email_buffer: .asciiz "Hochverehrte Empfaenger,\n\nbei dieser E-Mail handelt es 
 
 size: .word 538
 
-badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,10,lukrativ,3,Kohlrabi,1,Weihnachten,3,Onkel,71,Vermoegen,2,Brief,4,Lotto,3"
-badwords_size: .word 94
+badwords_buffer: .asciiz "Spam,5,Geld,1,ROrg,10,lukrativ,3,Kohlrabi,1,Weihnachten,3,Onkel,7,Vermoegen,2,Brief,4,Lotto,3"
+badwords_size: .word 93
 
 badwords_sep: .asciiz ","
 
