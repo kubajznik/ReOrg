@@ -189,9 +189,9 @@ spamfilter:
 
 		move $a1, $s7			# Letzte Listenlaenge laden
 		sub $a1, $a1, $s1		# Davon die Wortlaenge abziehen
-		sub $a1, $a1, $t8		# Und nochmal 3 abziehen; Komma,Zahl,Komma
-	#addi $a1, 1
-		move $a0, $a1
+		sub $a1, $a1, $t8		# 3/4 abziehen; Komma,Zahl,Komma
+	
+		move $a0, $s7
 		li $v0, 1
 		syscall
 
@@ -201,9 +201,8 @@ spamfilter:
 		
 		move $a0, $s4			# Adresse des letzten Wortes einlesen
 		add $a0, $a0, $s1		# Wortlaenge dazuaddieren
-		#li $s6, 3				# Komma, Zahl, Komma = 3 Stellen
-		add $a0, $a0, $t8		#  und diese dazuaddieren
-		#addi $a0, -1
+		add $a0, $a0, $t8		# 3/4 dazuaddieren
+		
 		
 
 		
