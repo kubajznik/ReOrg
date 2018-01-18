@@ -110,6 +110,7 @@ spamfilter:
 		
 		jal find_str			# zweites Komma finden
 		move $t7, $v0			# Laenge der Zahl sichern
+		bltz $t7, endbigfor
 				move $a0, $t7
 				li $v0, 1
 				syscall
