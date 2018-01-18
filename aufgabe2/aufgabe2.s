@@ -125,7 +125,7 @@ spamfilter:
 		lb $s2, 1($a0)			# Byte aus einer Stelle weiter rechts einlesen
 		addi $s2, -48 			# in int umrechnen
 		
-		li $t6, 1				# Wird spaeter gebraucht, um Adresse und Listenlaenge zu berechnen
+		li $t6, 3				# Wird spaeter gebraucht, um Adresse und Listenlaenge zu berechnen
 								# Ergibt sich aus Komma + Ziffer + Komma = 3
 		
 		j weiter
@@ -144,7 +144,7 @@ spamfilter:
 			
 			add $s2, $s2, $t9		# Zehner- und Einerstelle addieren
 			
-			li $t6, 2				# Wird spaeter gebraucht, um Adresse und Listenlaenge zu berechnen
+			li $t6, 4				# Wird spaeter gebraucht, um Adresse und Listenlaenge zu berechnen
 									# Ergibt sich aus Komma + Ziffer + Ziffer + Komma = 4
 			
 		weiter:
