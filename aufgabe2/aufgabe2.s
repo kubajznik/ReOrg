@@ -76,7 +76,7 @@ found_str:
 spamfilter:
     ### Register gemaess Registerkonventionen sichern
 	
-	#addi $sp, $sp, -12
+	addi $sp, $sp, -12
 	sw $ra, 0($sp)
 	#move $fp, $ra
     
@@ -198,7 +198,7 @@ spamfilter:
     #move $ra, $fp
 	
 	lw $ra, 0($sp)
-    #addi $sp, $sp, 4
+    addi $sp, $sp, 12
 	
 	jr $ra
 
