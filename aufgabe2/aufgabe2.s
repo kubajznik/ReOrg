@@ -144,7 +144,7 @@ spamfilter:
 			
 			add $s2, $s2, $t9		# Zehner- und Einerstelle addieren
 			
-			li $t6, 5				# Wird spaeter gebraucht, um Adresse und Listenlaenge zu berechnen
+			li $t6, 4				# Wird spaeter gebraucht, um Adresse und Listenlaenge zu berechnen
 									# Ergibt sich aus Komma + Ziffer + Ziffer + Komma = 4
 			
 		weiter:
