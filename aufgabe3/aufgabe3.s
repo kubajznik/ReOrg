@@ -107,33 +107,32 @@ print_email:
 	
     ### hier implementieren
 	
-	li $t1, 0
-	move $t2, $a1
-	move $t3, $a2
+	li $t1, 0						# Null zum Vergleich laden
+	move $t2, $a1					# Register sichern
+	move $t3, $a2					# Register sichern
 	
-	beq $a3, $t1, nospam
-		move $a1, $a2
-		li $a2, 1
-		jal write_email
+	beq $a3, $t1, nospam			# Pruefen, ob Spam
+		move $a1, $a2				# Bis zum Subject printen
+		li $a2, 1					# Datei von vorne beschreiben
+		jal write_email				# In Datei schreiben
 		
-		li $a2, 0
-		la $a0, spam_flag
-		lw $a1, spam_flag_length
-		jal write_email
+		li $a2, 0					# An Ende vorhandener Datei schreiben
+		la $a0, spam_flag			# Zu schreibender Text
+		lw $a1, spam_flag_length	# Dessen Laenge
+		jal write_email				# In Datei schreiben
 		
-		li $a2, 0
-		la $a0, email_buffer
-		add $a0, $a0, $t3
-		move $a1, $t2
-		sub $a1, $a1, $t3
-		jal write_email
+		li $a2, 0					# An Ende vorhandener Datei schreiben
+		la $a0, email_buffer		# Zu schreibenden Text laden
+		add $a0, $a0, $t3			# Startadresse des Textes um Position des Subject verschieben, da wir erst ab dort schreiben moechten
+		move $a1, $t2				# Laenge des Textes laden
+		sub $a1, $a1, $t3			# Davon abziehen, was schon geschrieben wurde
+		jal write_email				# In Datei schreiben
 		
-	
 	j spam
-	nospam:
+	nospam:						# Wenn kein Spam
 	
-	li $a2, 1
-	jal write_email
+	li $a2, 1					# Email einfach so in Datei schreiben, ab Anfang
+	jal write_email				# In Datei schreiben
 	spam:
 		
     ### gesicherte Register wieder herstellen
